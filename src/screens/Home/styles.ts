@@ -4,10 +4,13 @@ import { RFValue } from 'react-native-responsive-fontsize';
 
 
 export const Container = styled.View`
-  flex: 1;
-
+  width: 100%;
+  height: 100%;
+ 
   justify-content: center;
   align-items: center;
+
+  background-color: #CFE0ED;
 `;
 
 export const Imagem = styled.Image`
@@ -15,18 +18,34 @@ export const Imagem = styled.Image`
   width: ${RFValue(150)}px;
   height: ${RFValue(40)}px;
 
-  margin-bottom: ${RFValue(155)}px;
+  margin-bottom: ${RFValue(135)}px;
 `;
 
 export const Form = styled.View`
-  width: 90%;
-  height: 40%;
+  width: ${RFValue(359)}px;
+  height: ${RFValue(265)}px;
   background-color:#92A1E8;
 
   border-radius: 5px;
 
   justify-content: center;
   align-items: center;
+
 `;
 
+export const Password = styled.TouchableOpacity`
+
+`;
+
+export const PasswordTitle = styled.Text`
+  font-size: ${RFValue(14)}px;
+ 
+`;
+
+export const CreateAnAccount = styled.TouchableOpacity`
+  padding-top: ${RFValue(20)}px;
+`;
+export const CreateAnAccountTitle = styled.Text`
+  font-size: ${RFValue(18)}px;
+`;
 

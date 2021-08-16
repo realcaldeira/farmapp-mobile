@@ -3,8 +3,9 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
+  height: 40%;
   
-  
+  margin: ${RFValue(-15)}px;
   justify-content: center;
   align-items: center;
   
@@ -21,4 +22,6 @@ export const Data = styled.TextInput`
   height: 30%;
   background-color: white;
   border-radius: 5px;
+
+  padding-left: ${RFValue(10)}px;
 `;

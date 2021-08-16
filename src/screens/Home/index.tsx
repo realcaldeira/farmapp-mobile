@@ -1,20 +1,42 @@
 import React from 'react';
 
-import Logo from '../../assets/logo.png';
-import { Button } from '../components/Button';
-import { Input } from '../components/Input';
+import { KeyboardAvoidingView, Keyboard   } from 'react-native';
 
-import { Container, Imagem, Form } from './styles';
+import Logo from '../../assets/logo.png';
+import { Button } from '../../components/Button';
+import { Input } from '../../components/Input';
+
+import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
 export function Home() {
   return (
-    <Container>
-        <Imagem source={Logo}/>
-      <Form>
-        <Input texto='Login'/>
-        <Input texto='Senha'/>
+      <KeyboardAvoidingView behavior="height" enabled>
+        <Container>
+            <Imagem source={Logo}/>
+          <Form>
+            <Input 
+              texto='Login'
+              placeholder="Login"
+              autoCorrect={false}
+              autoCapitalize='none'
+            />
 
-        <Button />
-      </Form>
-    </Container>
+            <Input
+              texto='Senha'
+              placeholder="Senha"
+              secureTextEntry={true}
+            />
+
+            <Button />
+
+          <Password>
+            <PasswordTitle>Esqueci minha senha</PasswordTitle>
+          </Password>
+          </Form>
+
+          <CreateAnAccount>
+            <CreateAnAccountTitle>Cadastrar conta</CreateAnAccountTitle>
+          </CreateAnAccount>
+        </Container>
+    </KeyboardAvoidingView>
   );
 }
