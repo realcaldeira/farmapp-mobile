@@ -9,17 +9,19 @@ export const Container = styled.View`
   justify-content: center;
   align-items: center;
   
-  
+    
 `;
 
 export const Title = styled.Text`
   font-size: ${RFValue(18)}px;
+
+  margin: ${RFValue(5)}px;
 `;
 
 export const Data = styled.TextInput`
   
   width: 90%;
-  height: 30%;
+  height: 35%;
   background-color: white;
   border-radius: 5px;
 

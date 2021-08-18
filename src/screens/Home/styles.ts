@@ -47,5 +47,7 @@ export const CreateAnAccount = styled.TouchableOpacity`
 `;
 export const CreateAnAccountTitle = styled.Text`
   font-size: ${RFValue(18)}px;
+
+  font-weight: bold;
 `;
 
