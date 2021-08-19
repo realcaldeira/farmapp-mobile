@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { Container, Title, Data } from './styles';
+import { Container, Title, ContainerData, Data } from './styles';
 import { TextInputProps } from 'react-native';
 
 interface PropsInput extends TextInputProps{
-  texto: string;
+  texto?: string;
 }
 
 export function Input({ texto, ...rest }: PropsInput){
   return(
-    <Container >
-    <Title>{texto}</Title>
-    <Data {...rest} />
-  </Container>
+    <Container>
+      <Title>{texto}</Title>
+      <ContainerData>
+      <Data {...rest} />
+
+      </ContainerData>
+    </Container>
   )
 }

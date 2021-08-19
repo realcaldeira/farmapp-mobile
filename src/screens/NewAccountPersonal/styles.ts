@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 export const Container = styled.View`
   height: 100%;
   background-color: ${({ theme })=> theme.colors.background_primary};
+  justify-content: center;
+  align-content: center;
 
 `;
 
@@ -33,16 +35,41 @@ export const Prev = styled.TouchableOpacity`
 export const PrevTitle = styled.Text`
   font-size: ${RFValue(20)}px;
 
-  color: ${({ theme })=> theme.colors.text}
+  color: ${({ theme })=> theme.colors.text};
 `;
 
 export const Imagem = styled.Image`
-  resizeMode:contain;
+
 
   width: ${RFValue(100)}px;
   height: ${RFValue(30)}px;
   
   margin-left: ${RFValue(50)}px;
 
+`;
+
+export const ContainerForm = styled.ScrollView.attrs({
+  contentContainerStyle: {
+    paddingBottom: 20,
+    paddingTop: 10,
+    margin: 10,
+  },
+  
+  
+
+})`
+  width: ${RFValue(359)}px;
+  height: ${RFValue(561)}px;
+  
+  background-color: ${({ theme })=> theme.colors.background_secondary};
+  margin: 5%;
+  
+
+  border-radius: 5px;  
+`;
+
+export const Row = styled.View`
+
+  flex-direction: row;
 `;
 
