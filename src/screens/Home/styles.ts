@@ -23,14 +23,14 @@ export const Imagem = styled.Image`
 
 export const Form = styled.View`
   width: ${RFValue(359)}px;
-  height: ${RFValue(265)}px;
+  height: ${RFValue(285)}px;
   background-color:#92A1E8;
 
-  border-radius: 5px;
+  border-radius: 10px;
 
   justify-content: center;
   align-items: center;
-
+  padding: ${RFValue(30)}px;
 `;
 
 export const Password = styled.TouchableOpacity`

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 
 export const Container = styled.TouchableOpacity`
   width: ${RFValue(152)}px;
-  height: ${RFValue(33)}px;
+  height: ${RFValue(45)}px;
   background-color: #1C2139;
 
   justify-content: center;

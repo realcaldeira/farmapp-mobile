@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useForm } from 'react-hook-form';
 
-import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm, Row } from './styles';
+import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm } from './styles';
 import Logo from '../../assets/logo.png';
 import { InputForm } from '../../components/InputForm';
 import { Button } from '../../components/Button';
@@ -65,7 +65,7 @@ export function NewAccountPersonal(){
           // type="email"
         />
         
-        <Row>
+       
           <InputForm 
             name="password"
             texto="Senha"
@@ -80,7 +80,7 @@ export function NewAccountPersonal(){
             control={control}
             placeholder="Repita a Senha"
           />
-         </Row>
+       
           <InputForm 
             name="cpf"
             texto="CPF"

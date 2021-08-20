@@ -55,6 +55,7 @@ export const ContainerForm = styled.ScrollView.attrs({
     margin: 10,
     alignItems: 'center',
   },
+  showsVerticalScrollIndicator:false,
 })`
   width: ${RFValue(359)}px;
   height: ${RFValue(561)}px;
@@ -63,13 +64,7 @@ export const ContainerForm = styled.ScrollView.attrs({
   margin: 5%;
   
 
-  border-radius: 5px;  
+  border-radius: 20px;  
 `;
 
-export const Row = styled.View`
-  width: 48%;
-  
-  margin-left: ${RFValue(-170)}px;
-  flex-direction: row;
-`;
 
