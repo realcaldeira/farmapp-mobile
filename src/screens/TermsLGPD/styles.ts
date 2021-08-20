@@ -68,6 +68,8 @@ export const ContainerView = styled.View`
 
 export const Title = styled.Text`
   margin-top: ${RFValue(116)}px;
-  margin-bottom: ${RFValue(130)}px;
+  margin-bottom: ${RFValue(70)}px;
   text-align: center;
+  
+  font-size: ${RFValue(20)}px;
 `;
