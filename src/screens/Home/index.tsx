@@ -1,15 +1,23 @@
 import React from 'react';
-
 import { KeyboardAvoidingView, Keyboard,TouchableWithoutFeedback } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
 import Logo from '../../assets/logo.png';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 
 import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
+
+
 export function Home() {
+  const navigation = useNavigation();
+
   function handleLogin(){
 
+  }
+
+  function createAccount(){
+    navigation.navigate('NewAccountPersonal')
   }
 
 
@@ -40,7 +48,11 @@ export function Home() {
             </Form>
 
             <CreateAnAccount>
-              <CreateAnAccountTitle>Cadastrar conta</CreateAnAccountTitle>
+              <CreateAnAccountTitle
+                 onPress={createAccount}
+              >
+                Cadastrar conta
+            </CreateAnAccountTitle>
             </CreateAnAccount>
           </Container>
         </TouchableWithoutFeedback >

@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { useForm } from 'react-hook-form';
+import { useNavigation } from '@react-navigation/native';
 
 import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm } from './styles';
 import Logo from '../../assets/logo.png';
@@ -21,6 +21,8 @@ interface FormData {
 
 
 export function NewAccountPersonal(){
+  const navigation = useNavigation();
+
   const { 
     control,
     handleSubmit
@@ -38,12 +40,21 @@ export function NewAccountPersonal(){
     numero: form.numero,
   }
     console.log(data);
+    navigation.navigate('TermsLGPD', { data })
   }
+
+  function handleGoBack(){
+    navigation.goBack()
+  }
+
+ 
 
   return(
     <Container>
       <Header>
-        <Prev>
+        <Prev
+          onPress={handleGoBack}
+        >
           <PrevTitle>Voltar</PrevTitle>
         </Prev>
         <Imagem source={Logo}/>

@@ -1,10 +1,11 @@
 import React from 'react';
-import { createNativeStackNavigator  } from '@react-navigation/native-stack';
+import { createStackNavigator  } from '@react-navigation/stack';
 
 import { Home } from '../screens/Home';
 import { NewAccountPersonal } from '../screens/NewAccountPersonal';
+import { TermsLGPD } from '../screens/TermsLGPD';
 
-const { Navigator, Screen } = createNativeStackNavigator();
+const { Navigator, Screen } = createStackNavigator();
 
 export function AppStackRoutes(){
   return(
@@ -20,6 +21,10 @@ export function AppStackRoutes(){
       <Screen  
         name="NewAccountPersonal"
         component={NewAccountPersonal}
+      />
+      <Screen  
+        name="TermsLGPD"
+        component={TermsLGPD}
       />
     </Navigator>
   )
