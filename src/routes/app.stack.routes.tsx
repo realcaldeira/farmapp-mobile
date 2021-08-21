@@ -1,7 +1,7 @@
 import React from 'react';
 import { createStackNavigator  } from '@react-navigation/stack';
 
-import { Home } from '../screens/Home';
+import { Login } from '../screens/Login';
 import { NewAccountPersonal } from '../screens/NewAccountPersonal';
 import { TermsLGPD } from '../screens/TermsLGPD';
 
@@ -11,11 +11,11 @@ export function AppStackRoutes(){
   return(
     <Navigator
     screenOptions={{ headerShown: false }}
-    initialRouteName="Home"
+    initialRouteName="Login"
     >
       <Screen  
-        name="Home"
-        component={Home}
+        name="Login"
+        component={Login}
         
       />
       <Screen  

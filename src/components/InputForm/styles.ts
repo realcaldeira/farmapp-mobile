@@ -7,3 +7,9 @@ export const Container = styled.View`
  margin-top: ${RFValue(2)}px;
  
 `;
+
+export const Error = styled.Text`
+  font-size: ${RFValue(14)}px;
+  color: red;
+  margin-top: 2px;
+`;

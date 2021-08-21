@@ -9,7 +9,7 @@ import { Input } from '../../components/Input';
 import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
 
 
-export function Home() {
+export function Login() {
   const navigation = useNavigation();
 
   function handleLogin(){
@@ -32,12 +32,14 @@ export function Home() {
                 placeholder="Login"
                 autoCorrect={false}
                 autoCapitalize='none'
+                
               />
 
               <Input
                 texto='Senha'
                 placeholder="Senha"
                 secureTextEntry={true}
+                
               />
 
               <Button title="Entrar" onPress={handleLogin} />
