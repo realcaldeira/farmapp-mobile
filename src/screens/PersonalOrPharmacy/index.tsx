@@ -17,10 +17,11 @@ export function PersonalOrPharmacy() {
   function handlePersonal(){
     navigation.navigate('NewAccountPersonal')
   }
-
   function handlePharmacy(){
-
+    navigation.navigate('NewAccountPharmacy')
   }
+
+
 
 
   return (

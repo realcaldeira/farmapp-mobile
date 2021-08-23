@@ -11,7 +11,7 @@ interface Props extends TextInputProps {
   control: Control;
   name: string;
   texto: string;
-  error: string;
+  error?: string;
 }
 
 export function InputForm({
