@@ -9,12 +9,11 @@ interface PropsInput extends TextInputProps{
 
 export function Input({ texto, ...rest }: PropsInput){
   return(
-    <Container>
+    <Container {...rest}>
       <Title>{texto}</Title>
-      <ContainerData>
-      <Data {...rest} />
-
-      </ContainerData>
+        <ContainerData>
+         <Data {...rest} />
+        </ContainerData>
     </Container>
   )
 }
