@@ -10,15 +10,17 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
 
 interface FormData {
-  name: string;
+  login: string;
   password: string;
 }
 
 const schema = Yup.object().shape({
-  name: Yup
+  login: Yup
   .string()
   .required('Nome é obrigatório.'),
-
+  password: Yup
+  .string()
+  .required('Senha é obrigatório'),
 })
 
 export function Login() {
@@ -35,7 +37,7 @@ export function Login() {
 
   function handleLogin(form: FormData){
     const data = {
-      name: form.name,
+      login: form.login,
       password: form.password
     }
     console.log(data)
@@ -65,6 +67,7 @@ export function Login() {
                   texto="Senha"
                   control={control}
                   placeholder="Senha"
+                  secureTextEntry={true}
                   error={errors.password && errors.password.message}
                 />
 
