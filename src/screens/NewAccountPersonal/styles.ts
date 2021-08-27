@@ -1,4 +1,5 @@
 import { RFValue } from 'react-native-responsive-fontsize';
+import { getStatusBarHeight } from 'react-native-status-bar-height';
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
@@ -6,16 +7,15 @@ export const Container = styled.View`
   background-color: ${({ theme })=> theme.colors.background_primary};
   justify-content: center;
   align-content: center;
-
-`;
+  
+  `;
 
 export const Header = styled.View`
   height: 10%;
-  margin-top: ${RFValue(10)}px;
+  margin-top: ${getStatusBarHeight()}px;
 
   flex-direction: row;
   align-items: center;
-  
 `;
 
 export const Prev = styled.TouchableOpacity`
@@ -64,7 +64,7 @@ export const ContainerForm = styled.ScrollView.attrs({
   margin: 5%;
   
 
-  border-radius: 20px;  
+  border-radius: 10px;  
 `;
 
 

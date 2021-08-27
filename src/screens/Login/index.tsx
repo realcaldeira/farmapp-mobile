@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
+
 import { Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
@@ -51,6 +53,11 @@ export function Login() {
   return (
         <TouchableWithoutFeedback  onPress={Keyboard.dismiss} > 
           <Container>
+            <StatusBar 
+              barStyle="light-content"
+              backgroundColor="transparent"
+              translucent
+            />
               <Imagem source={Logo}/>
             <Form>
                 <InputForm 

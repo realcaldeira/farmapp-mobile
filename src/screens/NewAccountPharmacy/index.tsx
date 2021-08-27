@@ -1,4 +1,6 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
+
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
 import { TouchableWithoutFeedback, Keyboard} from 'react-native';
@@ -106,6 +108,11 @@ export function NewAccountPharmacy(){
   return(
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
+      <StatusBar 
+              barStyle="light-content"
+              backgroundColor="transparent"
+              translucent
+            />
         <Header>
           <Prev
             onPress={handleGoBack}

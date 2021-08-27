@@ -1,4 +1,5 @@
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 import Logo from '../../assets/logo.png';
@@ -27,6 +28,11 @@ export function PersonalOrPharmacy() {
   return (
       
           <Container>
+            <StatusBar 
+              barStyle="light-content"
+              backgroundColor="transparent"
+              translucent
+            />
               <Imagem source={Logo}/>
            
            <ContainerContent>
