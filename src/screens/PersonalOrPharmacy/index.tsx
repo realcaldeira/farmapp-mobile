@@ -44,10 +44,12 @@ export function PersonalOrPharmacy() {
                 <Button title="Pessoal ?" onPress={handlePersonal} />
 
               </DivButton>
-              <DivButton>
-                <Button title="Farmácia ?" onPress={handlePharmacy} />
 
+            
+              {/* <DivButton>
+                <Button  title="Farmácia ?" onPress={handlePharmacy} />
               </DivButton>
+               */}
             </ContainerButton>
            </ContainerContent>
           </Container>
