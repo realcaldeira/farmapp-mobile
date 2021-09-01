@@ -57,7 +57,7 @@ export const ContainerForm = styled.ScrollView.attrs({
   },
   showsVerticalScrollIndicator:false,
 })`
-  width: ${RFValue(359)}px;
+  width: ${RFValue(350)}px;
   height: ${RFValue(561)}px;
   
   background-color: ${({ theme })=> theme.colors.background_secondary};

@@ -22,7 +22,7 @@ export const Imagem = styled.Image`
 `;
 
 export const ContainerContent = styled.View`
-  width: ${RFValue(359)}px;
+  width: ${RFValue(350)}px;
   height: ${RFValue(225)}px;
   background-color:#92A1E8;
 
