@@ -1,5 +1,6 @@
 import React from 'react';
 import { StatusBar } from 'react-native';
+import { api } from '../../services/api';
 
 import { Keyboard,TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
@@ -37,12 +38,17 @@ export function Login() {
     resolver: yupResolver(schema)
   });
 
-  function handleLogin(form: FormData){
+  async function handleLogin(form: FormData){
     const data = {
       login: form.login,
       password: form.password
     }
-    console.log(data)
+    console.log(data);
+    
+    const response = await api.post(`/Login?login=${data.login}&senha=${data.password}`);
+    console.log("TOKEN");
+    console.log(response.data.token);
+    
   }
 
   function createAccount(){
