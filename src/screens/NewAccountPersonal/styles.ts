@@ -67,4 +67,10 @@ export const ContainerForm = styled.ScrollView.attrs({
   border-radius: 10px;  
 `;
 
+export const ContainerCep = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+`;
 

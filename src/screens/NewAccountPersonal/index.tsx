@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StatusBar } from 'react-native';
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
@@ -6,10 +6,11 @@ import { TouchableWithoutFeedback, Keyboard} from 'react-native';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 
-import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm } from './styles';
+import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm, ContainerCep } from './styles';
 import Logo from '../../assets/logo.png';
 import { InputForm } from '../../components/InputForm';
 import { Button } from '../../components/Button';
+import { apiCep } from '../../services/api';
 
 interface FormData {
   name: string;
@@ -19,9 +20,15 @@ interface FormData {
   cpf: string;
   birthDay: string;
   cep: string;
-  endereco: string;
+  logradouro: string;
+  complemento: string;
+  bairro: string;
+  localidade: string;
+  uf: string;
   numero: string;
 }
+
+
 
 const schema = Yup.object().shape({
   name: Yup
@@ -43,10 +50,10 @@ const schema = Yup.object().shape({
   birthDay: Yup
   .string()
   .required('Data de nascimento é obrigatório'),
-  cep: Yup
-  .number()
-  .typeError('O campo deve ser numérico')
-  .required('CEP é obrigatório'),
+  // cep: Yup
+  // .number()
+  // .typeError('O campo deve ser numérico')
+  // .required('CEP é obrigatório'),
   endereco: Yup
   .string()
   .required('Endereco é obrigatório'),
@@ -54,33 +61,53 @@ const schema = Yup.object().shape({
   .number()
   .typeError('O campo deve ser numérico')
   .required('Número é obrigatório'),
-
 })
 
 
 export function NewAccountPersonal(){
   const navigation = useNavigation();
 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [passwordRepeat, setPasswordRepeat] = useState('');
+  const [cpf, setCpf] = useState('');
+  const [birthDay, setBirthDay] = useState('');
+
+  const [buscacep, setBuscaCep] = useState('');
+  const [allCep, setAllCep] = useState<FormData[]>([]);
+  const [logradouro, setLogradouro] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [complemento, setComplemento] = useState('');
+  const [localidade, setLocalidade] = useState('');
+  const [uf, setUf] = useState('');
+  
+
   const { 
     control,
     handleSubmit,
-    formState: { errors }
+    // formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
   });
 
   function handleRegister(form: FormData){
+    console.log('teste')
 
-
-    const data = {name: form.name,
-    email: form.email,
-    password: form.password,
-    passwordRepeat: form.passwordRepeat,
-    cpf: form.cpf,
-    birthDay: form.birthDay,
-    cep: form.cep,
-    endereco: form.endereco,
-    numero: form.numero,
+    const data = {
+      name: name,
+      email: email,
+      password: password,
+      passwordRepeat: passwordRepeat,
+      cpf: cpf,
+      birthDay: birthDay,
+      cep: form.cep,
+      logradouro: form.logradouro,
+      complemento: complemento,
+      bairro: form.bairro,
+      localidade: form.localidade,
+      uf: form.uf,
+      numero: form.numero,
   }
     console.log(data);
     navigation.navigate('TermsLGPD', { data })
@@ -90,8 +117,24 @@ export function NewAccountPersonal(){
     navigation.goBack()
   }
 
- 
+  async function handleCep(cep: string){
+    try {
+      const response = await apiCep.get(`${cep}/json/`);
+      const data = response.data;
 
+      setAllCep(data);
+
+      setLogradouro(data.logradouro);
+      setBairro(data.bairro);
+      setLocalidade(data.localidade);
+      setUf(data.uf);
+      console.log(data)
+    }catch(error){
+      console.log(error)
+    }
+   
+  }
+  
   return(
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
       <Container>
@@ -109,13 +152,15 @@ export function NewAccountPersonal(){
           <Imagem source={Logo}/>
         </Header>
         
+         
         <ContainerForm>
           <InputForm 
             name="name"
             texto="Nome e Sobrenome"
             control={control}
             placeholder="Nome e Sobrenome"
-            error={errors.name && errors.name.message}
+            onChangeText={(t)=> setName (t)}
+            // error={errors.name && errors.name.message}
           />
           <InputForm 
             name="email"
@@ -124,7 +169,8 @@ export function NewAccountPersonal(){
             placeholder="E-mail"
             autoCapitalize="sentences"
             autoCorrect={false}
-            error={errors.email && errors.email.message}
+            onChangeText={(t)=> setEmail (t)}
+            // error={errors.email && errors.email.message}
           />
           
         
@@ -134,7 +180,8 @@ export function NewAccountPersonal(){
               control={control}
               placeholder="Senha"
               secureTextEntry={true}
-              error={errors.password && errors.password.message}
+              onChangeText={(t)=> setPassword (t)}
+              // error={errors.password && errors.password.message}
             />
 
             <InputForm 
@@ -143,7 +190,8 @@ export function NewAccountPersonal(){
               control={control}
               placeholder="Repita a Senha"
               secureTextEntry={true}
-              error={errors.passwordRepeat && errors.passwordRepeat.message}
+              onChangeText={(t)=> setPasswordRepeat (t)}
+              // error={errors.passwordRepeat && errors.passwordRepeat.message}
             />
         
             <InputForm 
@@ -152,40 +200,89 @@ export function NewAccountPersonal(){
               control={control}
               placeholder="CPF"
               keyboardType="numeric"
-              error={errors.cpf && errors.cpf.message}
+              onChangeText={(t)=> setCpf (t)}
+              // error={errors.cpf && errors.cpf.message}
             />
             <InputForm 
               name="birthDay"
               texto="Data de Nascimento"
               control={control}
               placeholder="Data de Nascimento"
-              error={errors.birthDay && errors.birthDay.message}
+              onChangeText={(t)=> setBirthDay (t)}
+              // error={errors.birthDay && errors.birthDay.message}
             />
+            
+          {/* <ContainerCep> */}
+
             <InputForm 
               name="cep"
               texto="CEP"
               control={control}
               placeholder="CEP"
               keyboardType="numeric"
-              error={errors.cep && errors.cep.message}
+              onChangeText={(t)=> setBuscaCep(t)}
+              // error={errors.cep && errors.cep.message}
             />
+
+            { allCep.length == 0 &&
+              <Button title="Busca" onPress={()=> handleCep(buscacep)}/>
+             
+            }
+            { localidade.length > 0 &&
+             <>
             <InputForm 
-              name="endereco"
-              texto="Endereço"
+              name="logradouro"
+              texto="Logradouro"
+              value={logradouro}
               control={control}
-              placeholder="Endereço"
-              error={errors.endereco && errors.endereco.message}
+              placeholder="Logradouro"
             />
+
+            <InputForm 
+              name="complemento"
+              texto="Complemento"
+              control={control}
+              placeholder="Complemento"
+              onChangeText={(t)=> setComplemento (t)}
+            />
+
+            <InputForm 
+              name="bairro"
+              texto="Bairro"
+              value={bairro}
+              control={control}
+              placeholder="Bairro"
+            />   
+
+            <InputForm 
+              name="cidade"
+              texto="Cidade"
+              value={localidade}
+              control={control}
+              placeholder="Cidade"
+            />    
+            
+            <InputForm 
+              name="uf"
+              texto="UF"
+              value={uf}
+              control={control}
+              placeholder="UF"
+            />    
+
             <InputForm 
               name="numero"
               texto="Número"
               control={control}
               placeholder="Número"
               keyboardType="numeric"
-              error={errors.numero && errors.numero.message}
+              
             />
   
-        <Button title="Cadastrar" onPress={handleSubmit(handleRegister)}/>
+        <Button title="Cadastrar" onPress={handleRegister}/>
+        
+      </>
+      } 
         </ContainerForm>
 
       </Container>
