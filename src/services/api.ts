@@ -4,4 +4,8 @@ const api = axios.create({
   baseURL: 'https://farmappapi.herokuapp.com/api'
 });
 
-export {api};
+const apiCep = axios.create({
+  baseURL: 'viacep.com.br/ws/'
+});
+
+export {api, apiCep};

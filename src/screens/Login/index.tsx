@@ -1,5 +1,5 @@
 import React from 'react';
-import { StatusBar } from 'react-native';
+import { Alert, StatusBar } from 'react-native';
 import { api } from '../../services/api';
 
 import { Keyboard,TouchableWithoutFeedback } from 'react-native';
@@ -43,12 +43,18 @@ export function Login() {
       login: form.login,
       password: form.password
     }
-    console.log(data);
     
-    const response = await api.post(`/Login?login=${data.login}&senha=${data.password}`);
-    console.log("TOKEN");
-    console.log(response.data.token);
-    
+    try {
+      const response = await api.post(`/Login?login=${data.login}&senha=${data.password}`);
+      if(response.data.token.length > 0){
+        
+        Alert.alert("Acesso liberado")
+      }
+    } catch (error){
+      console.log(error)
+      Alert.alert("Acesso negado")
+    }
+
   }
 
   function createAccount(){
