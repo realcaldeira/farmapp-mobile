@@ -1,29 +1,114 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigation, useRoute  } from '@react-navigation/native';
 
 import { Container, Header, Imagem, Prev, PrevTitle, ContainerView, Title} from './styles';
 import Logo from '../../assets/logo.png';
 import { Button } from '../../components/Button';
+import { api } from '../../services/api';
+import axios from 'axios';
+import { Alert } from 'react-native';
 
 interface Params {
-  data: {}
+  data: {
+      name: string;
+      email: string;
+      password: string;
+      passwordRepeat: string;
+      cpf: string;
+      birthDay: string;
+      numero: string;
+      complemento: string;
+
+      cep: string;
+      logradouro: string;
+     
+      bairro: string;
+      localidade: string;
+      uf: string; 
+  }
 }
+interface ParamsEndereco {
+  allCep: {
+      cep: string;
+      logradouro: string;
+     
+      bairro: string;
+      localidade: string;
+      uf: string;   
+  }
+}
+
 
 export function TermsLGPD(){
   const route = useRoute();
-  const { data } = route.params as Params;
-
   const navigation = useNavigation();
 
-
+  // const { data } = route.params as Params;
 
   function handleGoBack(){
     navigation.goBack()
   }
 
-  function handleNewAccount(){
-    console.log(data)
+  async function handleNewAccount(){
+    const { data } = route.params as Params;
+    const { allCep } = route.params as ParamsEndereco;
+
+    const carDTO = {
+        nome: data.name,
+        email: data.email,
+        senha: data.password,
+        repeteSenha: data.passwordRepeat,
+        cpf: data.cpf,
+        dataNascimento: data.birthDay,
+        celular: ' ',
+        cep: data.cep,
+        uf: data.uf,
+        cidade: data.localidade,
+        bairro: data.bairro,
+        endereco: data.logradouro,
+        numero: data.numero,
+        complemento: data.complemento,
+        situacaoConsentimento: "A"
+    }
+     try{
+
+      const response = axios({
+        method: 'post',
+        headers: {
+          'Accept': 'application/hal+json',
+          'Content-Type': 'application/merge-patch+json'
+      },
+        url: 'https://farmappapi.herokuapp.com/api/Cliente',
+        data: carDTO
+    });
+
+    
+      console.log("RESPONSE");
+      console.log(response);
+
+      console.log('DATA')
+      console.log(data)
+
+      console.log('PACOTE')
+      console.log(carDTO)
+
+      Alert.alert("VOCÊ RECEBÁ UMA EMAIL PARA CONFIRMAR SEU CADASTRO.");
+
+
+    }catch(error){
+      console.log(error)
+      console.log('testeee')
+      console.log(carDTO)
+      
+    } finally {
+      navigation.navigate("Login");
+    }
+   
   }
+
+  useEffect(()=> {
+    // console.log(data)
+  },[])
 
   return(
     <Container>

@@ -28,6 +28,18 @@ interface FormData {
   numero: string;
 }
 
+interface ParamsEndereco {
+  allCep: {
+      cep: string;
+      logradouro: string;
+      complemento: string;
+      bairro: string;
+      localidade: string;
+      uf: string;
+      numero: string;
+  }
+}
+
 
 
 const schema = Yup.object().shape({
@@ -76,17 +88,19 @@ export function NewAccountPersonal(){
 
   const [buscacep, setBuscaCep] = useState('');
   const [allCep, setAllCep] = useState<FormData[]>([]);
+  const [cep, setCep] = useState();
   const [logradouro, setLogradouro] = useState('');
   const [bairro, setBairro] = useState('');
   const [complemento, setComplemento] = useState('');
   const [localidade, setLocalidade] = useState('');
   const [uf, setUf] = useState('');
+  const [numero, setNumero] = useState('');
   
 
   const { 
     control,
     handleSubmit,
-    // formState: { errors }
+    formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
   });
@@ -101,13 +115,13 @@ export function NewAccountPersonal(){
       passwordRepeat: passwordRepeat,
       cpf: cpf,
       birthDay: birthDay,
-      cep: form.cep,
-      logradouro: form.logradouro,
+      cep: cep,
+      logradouro: logradouro,
       complemento: complemento,
-      bairro: form.bairro,
-      localidade: form.localidade,
-      uf: form.uf,
-      numero: form.numero,
+      bairro: bairro,
+      localidade: localidade,
+      uf: uf,
+      numero: numero,
   }
     console.log(data);
     navigation.navigate('TermsLGPD', { data })
@@ -160,7 +174,7 @@ export function NewAccountPersonal(){
             control={control}
             placeholder="Nome e Sobrenome"
             onChangeText={(t)=> setName (t)}
-            // error={errors.name && errors.name.message}
+            error={errors.name && errors.name.message}
           />
           <InputForm 
             name="email"
@@ -220,22 +234,23 @@ export function NewAccountPersonal(){
               control={control}
               placeholder="CEP"
               keyboardType="numeric"
-              onChangeText={(t)=> setBuscaCep(t)}
+              onChangeText={(t)=> setCep(t)}
               // error={errors.cep && errors.cep.message}
             />
 
-            { allCep.length == 0 &&
-              <Button title="Busca" onPress={()=> handleCep(buscacep)}/>
+            {/* { allCep.length == 0 && */}
+              {/* <Button title="Busca" onPress={()=> handleCep(buscacep)}/> */}
              
-            }
-            { localidade.length > 0 &&
-             <>
+            {/* }
+            { localidade.length > 0 && */}
+             {/* <> */}
             <InputForm 
               name="logradouro"
               texto="Logradouro"
-              value={logradouro}
+              // value={logradouro}
               control={control}
               placeholder="Logradouro"
+              onChangeText={(t)=> setLogradouro(t)}
             />
 
             <InputForm 
@@ -249,25 +264,28 @@ export function NewAccountPersonal(){
             <InputForm 
               name="bairro"
               texto="Bairro"
-              value={bairro}
+              // value={bairro}
               control={control}
               placeholder="Bairro"
+              onChangeText={(t)=> setBairro (t)}
             />   
 
             <InputForm 
               name="cidade"
               texto="Cidade"
-              value={localidade}
+              // value={localidade}
               control={control}
               placeholder="Cidade"
+              onChangeText={(t)=> setLocalidade (t)}
             />    
             
             <InputForm 
               name="uf"
               texto="UF"
-              value={uf}
+              // value={uf}
               control={control}
               placeholder="UF"
+              onChangeText={(t)=> setUf(t)}
             />    
 
             <InputForm 
@@ -276,13 +294,13 @@ export function NewAccountPersonal(){
               control={control}
               placeholder="Número"
               keyboardType="numeric"
-              
+              onChangeText={(t)=> setNumero (t)}
             />
   
         <Button title="Cadastrar" onPress={handleRegister}/>
         
-      </>
-      } 
+      {/* </>
+      }  */}
         </ContainerForm>
 
       </Container>

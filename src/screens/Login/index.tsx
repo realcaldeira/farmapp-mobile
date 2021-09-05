@@ -49,6 +49,7 @@ export function Login() {
       if(response.data.token.length > 0){
         
         Alert.alert("Acesso liberado")
+        console.log(response)
       }
     } catch (error){
       console.log(error)
@@ -83,7 +84,6 @@ export function Login() {
                   control={control}
                   placeholder="Login"
                   error={errors.login && errors.login.message}
-                  
                 />
 
                 <InputForm
