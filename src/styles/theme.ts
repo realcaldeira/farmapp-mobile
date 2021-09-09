@@ -3,6 +3,7 @@ export default {
     background_primary: '#CFE0ED',
     background_secondary: '#92A1E8',
     background_tertiary: '#525F8F',
+    background_others: '#1C2139',
     
     shape: '#1C2139',
     shape_light: '#CFE0ED',

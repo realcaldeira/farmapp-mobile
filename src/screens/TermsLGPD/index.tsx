@@ -92,16 +92,12 @@ export function TermsLGPD(){
       console.log('PACOTE')
       console.log(carDTO)
 
-      Alert.alert("VOCÊ RECEBÁ UMA EMAIL PARA CONFIRMAR SEU CADASTRO.");
-
-
     }catch(error){
       console.log(error)
-      console.log('testeee')
       console.log(carDTO)
       
     } finally {
-      navigation.navigate("Login");
+      navigation.navigate("Success");
     }
    
   }
