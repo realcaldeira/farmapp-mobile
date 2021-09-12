@@ -3,11 +3,14 @@
     "name": "farmapp",
     "slug": "farmapp",
     "version": "1.0.0",
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "android": {
-      "package": "com.farmapp.meuap"
+      "package": "com.farmapp.meuap",
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyCURn_syGG_xxz3nAR2CPNpwSpVu_QO8As"
+        }
+      }
     }
   },
   "name": "farmapp"
