@@ -5,29 +5,29 @@ export const Container = styled.View`
   flex: 1;
   background-color: ${({ theme })=> theme.colors.background_primary};
 
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
 `;
-
 
 
 export const ContainerContentTop = styled.View`
+ 
   height: ${RFValue(55)}px;
   width: ${RFValue(350)}px;
-  background-color:#92A1E8;
-
-  border-radius: 10px;
-
+  
   justify-content: space-around;
   align-items: center;
-  margin-bottom: 120px;
-  flex-direction: row;
   
 `;
 
-export const Title = styled.Text`
-
+export const Content = styled.View`
+  
+  background-color:#92A1E8;
+  flex-direction: row;
+  margin-top: ${RFValue(200)}px;
+  border-radius: 10px;
 `;
+
 
 export const ContainerContent = styled.View`
   width: ${RFValue(350)}px;
@@ -38,4 +38,5 @@ export const ContainerContent = styled.View`
 
   justify-content: center;
   align-items: center;
+  z-index: 40
 `;

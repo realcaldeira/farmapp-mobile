@@ -6,7 +6,8 @@ interface ButtonsProps {
   color?: string;
 }
 
-export const Container =  styled(RectButton)<ButtonsProps>`
+// export const Container =  styled(RectButton)<ButtonsProps>`
+export const Container =  styled.TouchableOpacity<ButtonsProps>`
   width: ${RFValue(152)}px;
   height: ${RFValue(45)}px;
   background-color: ${({ color })=> color};
