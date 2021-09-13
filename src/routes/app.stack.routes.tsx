@@ -9,6 +9,7 @@ import { NewAccountPharmacy } from '../screens/NewAccountPharmacy';
 import { TermsLGPD } from '../screens/TermsLGPD';
 import { Success } from '../screens/Success';
 import { AccessLocation } from '../screens/AccessLocation';
+import { Profile } from '../screens/Profile';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -16,7 +17,7 @@ export function AppStackRoutes(){
   return(
     <Navigator
     screenOptions={{ headerShown: false }}
-    initialRouteName="AccessLocation"
+    initialRouteName="Profile"
     >
       <Screen  
         name="Login"
@@ -47,6 +48,10 @@ export function AppStackRoutes(){
       <Screen  
         name="AccessLocation"
         component={AccessLocation}
+      />
+      <Screen  
+        name="Profile"
+        component={Profile}
       />
     </Navigator>
   )
