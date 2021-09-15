@@ -2,10 +2,12 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
 import { AppStackRoutes } from './app.stack.routes';
+import { AppDrawerRoutes } from './app.drawer.routes';
+
 export function Routes(){
   return (
     <NavigationContainer>
-        <AppStackRoutes />
+        <AppDrawerRoutes />
     </NavigationContainer>
   )
 }

@@ -4,7 +4,7 @@ import {
   Container
 } from './styles';
 
-export function Profile(){
+export function Home(){
   return(
     <Container>
       

@@ -2,6 +2,7 @@ import React from 'react';
 import { createStackNavigator  } from '@react-navigation/stack';
 
 
+import { AppTabRoutes } from './app.tab.routes';
 import { Login } from '../screens/Login';
 import { NewAccountPersonal } from '../screens/NewAccountPersonal';
 import { PersonalOrPharmacy } from '../screens/PersonalOrPharmacy';
@@ -9,7 +10,7 @@ import { NewAccountPharmacy } from '../screens/NewAccountPharmacy';
 import { TermsLGPD } from '../screens/TermsLGPD';
 import { Success } from '../screens/Success';
 import { AccessLocation } from '../screens/AccessLocation';
-import { Profile } from '../screens/Profile';
+import { Home } from '../screens/Home';
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -17,8 +18,13 @@ export function AppStackRoutes(){
   return(
     <Navigator
     screenOptions={{ headerShown: false }}
-    initialRouteName="Profile"
+    initialRouteName="Home"
     >
+      <Screen  
+        name="AppTabRoutes"
+        component={AppTabRoutes}
+        
+      />
       <Screen  
         name="Login"
         component={Login}
@@ -50,8 +56,8 @@ export function AppStackRoutes(){
         component={AccessLocation}
       />
       <Screen  
-        name="Profile"
-        component={Profile}
+        name="Home"
+        component={Home}
       />
     </Navigator>
   )
