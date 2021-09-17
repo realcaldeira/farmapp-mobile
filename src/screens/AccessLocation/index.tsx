@@ -1,11 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Container, ContainerContentTop, Content } from './styles';
-import MapView, {
-  Callout,
-  Marker,
-  PROVIDER_GOOGLE,
-  Region,
-} from "react-native-maps";
+import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
 
 import { ActivityIndicator } from 'react-native';
@@ -23,8 +18,7 @@ interface Location {
 
 
 export function AccessLocation(){
-  const [isCasa, setIsCasa] = useState(false);
-  const [isTrabalho, setIsTrabalho] = useState(false);
+  const [location, setLocation] = useState(true);
  
   const [region, setRegion] = useState<Location>({  });
 
@@ -57,6 +51,14 @@ export function AccessLocation(){
    )
  }
 
+ function handleConfirm(){
+  console.log('Location');
+  console.log(location);
+
+  console.log('LAT E LONG');
+  console.log(region);
+ }
+
   return(
 
     <Container>
@@ -65,6 +67,7 @@ export function AccessLocation(){
       <Content>
         <CheckBox 
           title="Casa"
+          
           checkedIcon="check"
           checkedColor="green"
           uncheckedIcon='circle-o'
@@ -75,9 +78,9 @@ export function AccessLocation(){
             
           }}
           textStyle={{color: 'white', fontSize: 18}}
-          checked={isCasa}
+          checked={location}
           
-          onPress={()=> setIsCasa(!isCasa)}
+          onPress={()=> setLocation(!location)}
         />
 
         <CheckBox 
@@ -92,9 +95,9 @@ export function AccessLocation(){
           textStyle={{color: 'white', fontSize: 18}}
           uncheckedIcon='circle-o'
           uncheckedColor='white'
-          checked={isTrabalho}
+          checked={!location}
           
-          onPress={()=> setIsTrabalho(!isTrabalho)}
+          onPress={()=> setLocation(!location)}
         />
       </Content>
         
@@ -123,9 +126,7 @@ export function AccessLocation(){
         </MapView>
 
       }
-      <Button title="Confirmar" onPress={()=>{
-        console.log('teste')
-      }}  style={{marginBottom: 60, }}/>
+      <Button title="Confirmar" onPress={handleConfirm}  style={{marginBottom: 60, }}/>
      
     </Container>
   );

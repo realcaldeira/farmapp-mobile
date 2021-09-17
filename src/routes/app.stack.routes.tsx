@@ -2,7 +2,7 @@ import React from 'react';
 import { createStackNavigator  } from '@react-navigation/stack';
 
 
-import { AppTabRoutes } from './app.tab.routes';
+import { AppDrawerRoutes } from './app.drawer.routes';
 import { Login } from '../screens/Login';
 import { NewAccountPersonal } from '../screens/NewAccountPersonal';
 import { PersonalOrPharmacy } from '../screens/PersonalOrPharmacy';
@@ -21,8 +21,8 @@ export function AppStackRoutes(){
     initialRouteName="Home"
     >
       <Screen  
-        name="AppTabRoutes"
-        component={AppTabRoutes}
+        name="AppDrawerRoutes"
+        component={AppDrawerRoutes}
         
       />
       <Screen  
