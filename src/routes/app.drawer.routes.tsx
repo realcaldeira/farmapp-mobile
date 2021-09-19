@@ -15,13 +15,14 @@ export function AppDrawerRoutes(){
       screenOptions={{
         headerShown: false
       }}
+      initialRouteName="AccessLocation"
     >
       <Screen 
-        name="Home"
+        name="Inicio"
         component={Home}
       />
       <Screen 
-        name="AccessLocation"
+        name="Localização"
         component={AccessLocation}
       />
     </Navigator>

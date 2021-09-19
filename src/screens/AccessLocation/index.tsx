@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Container, ContainerContentTop, Content } from './styles';
 import MapView, { Marker } from "react-native-maps";
 import * as Location from "expo-location";
@@ -8,6 +8,7 @@ import { ActivityIndicator } from 'react-native';
 import { CheckBox } from 'react-native-elements';
 import { Alert } from 'react-native';
 import { Button } from '../../components/Button';
+import { AuthContext } from '../../providers/auth';
 
 interface Location {
   latitude?: number;
@@ -21,6 +22,9 @@ export function AccessLocation(){
   const [location, setLocation] = useState(true);
  
   const [region, setRegion] = useState<Location>({  });
+
+  const {token}  = useContext(AuthContext);
+  
 
   const getCurrentPosition = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -57,6 +61,9 @@ export function AccessLocation(){
 
   console.log('LAT E LONG');
   console.log(region);
+
+  console.log('LOCALIZAÇÃO')
+  console.log(token)
  }
 
   return(

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { api } from '../../services/api';
 
@@ -11,6 +11,7 @@ import { InputForm } from '../../components/InputForm';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
+import { AuthContext } from '../../providers/auth';
 
 interface FormData {
   login: string;
@@ -28,7 +29,10 @@ const schema = Yup.object().shape({
 
 export function Login() {
   
+
   const navigation = useNavigation();
+
+  const {setToken}  = useContext(AuthContext);
 
   const { 
     control,
@@ -49,7 +53,8 @@ export function Login() {
       if(response.data.token.length > 0){
         
         Alert.alert("Acesso liberado")
-        console.log(response)
+  
+        setToken(response.data.token);
       }
     } catch (error){
       console.log(error)
