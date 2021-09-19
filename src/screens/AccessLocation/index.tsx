@@ -81,7 +81,7 @@ export function AccessLocation(){
   ).then((json)=> 
     json.status === 200 
     ? 
-    Alert.alert('DADOS SALVAOS COM SUCESSO')  
+    Alert.alert('DADOS SALVOS COM SUCESSO')  
     : '')
   .catch(console.log);
  }
