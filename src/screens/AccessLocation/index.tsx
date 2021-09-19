@@ -10,6 +10,9 @@ import { Alert } from 'react-native';
 import { Button } from '../../components/Button';
 import { AuthContext } from '../../providers/auth';
 
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
+
 interface Location {
   latitude?: number;
   longitude?: number;
@@ -20,11 +23,13 @@ interface Location {
 
 export function AccessLocation(){
   const [location, setLocation] = useState(true);
- 
   const [region, setRegion] = useState<Location>({  });
+ 
 
   const {token}  = useContext(AuthContext);
   
+  var decoded = jwt_decode(token);
+  console.log(decoded)
 
   const getCurrentPosition = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
@@ -43,27 +48,42 @@ export function AccessLocation(){
   
   useEffect(() => {
     getCurrentPosition();
-    console.log(region)
   }, []);
 
 
  if(!region.latitude){
-   return(<Container>
-
+   return(
+   <Container>
      <ActivityIndicator size="large" color="#0000ff" />
    </Container>
    )
  }
+ 
 
- function handleConfirm(){
-  console.log('Location');
-  console.log(location);
-
-  console.log('LAT E LONG');
-  console.log(region);
-
-  console.log('LOCALIZAÇÃO')
-  console.log(token)
+ async function handleConfirm(){
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+  
+  const bodyParameters = {
+    latitude: region.latitude,
+    longitude: region.longitude,
+    latitudeDelta: region.latitudeDelta,
+    longitudeDelta: region.longitudeDelta,
+    idTipoEndereco: location,
+    idContaPessoal: decoded.IdContaPessoal
+  };
+  
+   axios.post( 
+    'https://farmappapi.herokuapp.com/api/Endereco/AddFromLatLong',
+    bodyParameters,
+    config
+  ).then((json)=> 
+    json.status === 200 
+    ? 
+    Alert.alert('DADOS SALVAOS COM SUCESSO')  
+    : '')
+  .catch(console.log);
  }
 
   return(

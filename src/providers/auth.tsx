@@ -4,6 +4,7 @@ export const AuthContext = createContext({});
 
 interface Props {
   children: ReactNode;
+  token?: string;
 }
 
 export const AuthProvider = ({children}:Props) => {
