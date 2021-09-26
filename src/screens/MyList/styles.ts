@@ -21,6 +21,7 @@ export const Header = styled.View`
 `;
 
 export const ContainerDrawer = styled.TouchableOpacity`
+  
 `;
 
 export const ImagemDrawer = styled.Image`
@@ -44,57 +45,21 @@ export const ImagemSync = styled.Image`
   /* margin-left: ${RFValue(50)}px; */
 `;
 
+
+export const List = styled.FlatList`
+  height: 100%;
+`;
+
 export const ButtonSync = styled.TouchableOpacity`
   
 `;
 
-export const ContainerSearch = styled.View`
-  height: 10%;
-  /* background-color: red; */
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0 12px;
-`;
-
-export const InputSearch = styled.TextInput`
-  width: ${RFValue(255)}px;
-  height:  ${RFValue(37)}px;
-  
-  text-align: center;
-  color: white;
-  background: #525F8F;
-  border-radius: 10px;
-`;
-
-export const ButtonSearch = styled.TouchableOpacity`
-  width: ${RFValue(104)}px;
-  height:  ${RFValue(37)}px;
-  
-  justify-content: center;
+export const ContainerBody = styled.View`
+  height: 100%;
   align-items: center;
-
-  background: #525F8F;
-  border-radius: 10px;
-  
 `;
 
 export const Title = styled.Text`
-  color: white;
-`;
-
-export const ContainerAddToList = styled.View`
-  height: 10%;
-  
-  
-`;
-export const TitleAddToList = styled.Text`
-  text-align: right;
-  margin-right: ${RFValue(35)}px;
-  font-weight: bold;
-`;
-
-export const List = styled.FlatList`
-  height: 100%;
-  /* margin-top: 20px; */
-  /* background-color: red; */
+  font-size: ${RFValue(18)}px;
+  margin-bottom: 20px;
 `;

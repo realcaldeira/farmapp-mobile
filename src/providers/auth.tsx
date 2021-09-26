@@ -7,12 +7,13 @@ interface Props {
   token?: string;
 }
 
-export const AuthProvider = ({children}:Props) => {
+export const AuthProvider = ({ children }: Props) => {
   const [token, setToken] = useState('');
+  const [list, setList] = useState([]);
 
-  return(
-    <AuthContext.Provider value={{ token, setToken }}>
-      { children }
+  return (
+    <AuthContext.Provider value={{ token, setToken, list, setList }}>
+      {children}
     </AuthContext.Provider>
   )
 }

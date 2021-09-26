@@ -7,18 +7,22 @@ import { AuthStackRoutes } from './auth.stack.routes';
 
 import { AuthContext } from '../providers/auth';
 
+
+// import { RecipeSearch } from '../screens/RecipeSearch';
+
 interface User {
   token?: string;
 }
 
-export function Routes(){
-  const {token} = useContext<User>(AuthContext);
-  console.log(token);
+export function Routes() {
+  const { token } = useContext<User>(AuthContext);
+  // console.log(token);
   return (
-  <>
-    <NavigationContainer>
-        {token ? <AppStackRoutes /> : <AuthStackRoutes /> }
-    </NavigationContainer>
-  </>
+    <>
+      <NavigationContainer>
+        {token ? <AppStackRoutes /> : <AuthStackRoutes />}
+        {/* <RecipeSearch /> */}
+      </NavigationContainer>
+    </>
   )
 }

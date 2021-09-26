@@ -21,13 +21,13 @@ interface Location {
 }
 
 
-export function AccessLocation(){
+export function AccessLocation() {
   const [location, setLocation] = useState(true);
-  const [region, setRegion] = useState<Location>({  });
- 
+  const [region, setRegion] = useState<Location>({});
 
-  const {token}  = useContext(AuthContext);
-  
+
+  const { token } = useContext(AuthContext);
+
   var decoded = jwt_decode(token);
   console.log(decoded)
 
@@ -41,120 +41,120 @@ export function AccessLocation(){
       let {
         coords: { latitude, longitude },
       } = await Location.getCurrentPositionAsync();
-  
+
       setRegion({ latitude, longitude, latitudeDelta: 0.0922, longitudeDelta: 0.0421 });
     }
   }
-  
+
   useEffect(() => {
     getCurrentPosition();
   }, []);
 
 
- if(!region.latitude){
-   return(
-   <Container>
-     <ActivityIndicator size="large" color="#0000ff" />
-   </Container>
-   )
- }
- 
+  if (!region.latitude) {
+    return (
+      <Container>
+        <ActivityIndicator size="large" color="#0000ff" />
+      </Container>
+    )
+  }
 
- async function handleConfirm(){
+
+  async function handleConfirm() {
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
-  
-  const bodyParameters = {
-    latitude: region.latitude,
-    longitude: region.longitude,
-    latitudeDelta: region.latitudeDelta,
-    longitudeDelta: region.longitudeDelta,
-    idTipoEndereco: location,
-    idContaPessoal: decoded.IdContaPessoal
-  };
-  
-   axios.post( 
-    'https://farmappapi.herokuapp.com/api/Endereco/AddFromLatLong',
-    bodyParameters,
-    config
-  ).then((json)=> 
-    json.status === 200 
-    ? 
-    Alert.alert('DADOS SALVOS COM SUCESSO')  
-    : '')
-  .catch(console.log);
- }
 
-  return(
+    const bodyParameters = {
+      latitude: region.latitude,
+      longitude: region.longitude,
+      latitudeDelta: region.latitudeDelta,
+      longitudeDelta: region.longitudeDelta,
+      idTipoEndereco: location,
+      idContaPessoal: decoded.IdContaPessoal
+    };
+
+    axios.post(
+      'https://farmappapi.herokuapp.com/api/Endereco/AddFromLatLong',
+      bodyParameters,
+      config
+    ).then((json) =>
+      json.status === 200
+        ?
+        Alert.alert('DADOS SALVOS COM SUCESSO')
+        : '')
+      .catch(console.log);
+  }
+
+  return (
 
     <Container>
       <ContainerContentTop>
-      
-      <Content>
-        <CheckBox 
-          title="Casa"
-          
-          checkedIcon="check"
-          checkedColor="green"
-          uncheckedIcon='circle-o'
-          uncheckedColor='white'
-          containerStyle={{
-            backgroundColor: '#92A1E8', 
-            borderColor: '#92A1E8',
-            
-          }}
-          textStyle={{color: 'white', fontSize: 18}}
-          checked={location}
-          
-          onPress={()=> setLocation(!location)}
-        />
 
-        <CheckBox 
-          title="Trabalho"
-          checkedIcon="check"
-          checkedColor="green"
-          containerStyle={{
-            backgroundColor: '#92A1E8', 
-            borderColor: '#92A1E8',
-           
-          }}
-          textStyle={{color: 'white', fontSize: 18}}
-          uncheckedIcon='circle-o'
-          uncheckedColor='white'
-          checked={!location}
-          
-          onPress={()=> setLocation(!location)}
-        />
-      </Content>
-        
-     
+        <Content>
+          <CheckBox
+            title="Casa"
+
+            checkedIcon="check"
+            checkedColor="green"
+            uncheckedIcon='circle-o'
+            uncheckedColor='white'
+            containerStyle={{
+              backgroundColor: '#92A1E8',
+              borderColor: '#92A1E8',
+
+            }}
+            textStyle={{ color: 'white', fontSize: 18 }}
+            checked={location}
+
+            onPress={() => setLocation(!location)}
+          />
+
+          <CheckBox
+            title="Trabalho"
+            checkedIcon="check"
+            checkedColor="green"
+            containerStyle={{
+              backgroundColor: '#92A1E8',
+              borderColor: '#92A1E8',
+
+            }}
+            textStyle={{ color: 'white', fontSize: 18 }}
+            uncheckedIcon='circle-o'
+            uncheckedColor='white'
+            checked={!location}
+
+            onPress={() => setLocation(!location)}
+          />
+        </Content>
+
+
       </ContainerContentTop>
-      
-      { 
-      region.latitude &&
-        <MapView 
-          style={{ width: '100%', height: '100%', marginTop: 70, zIndex: -99}}
+
+      {
+        region.latitude &&
+        <MapView
+          style={{ width: '100%', height: '100%', marginTop: 70, zIndex: -99 }}
           loadingEnabled={true}
           region={{
-            latitude:  Number(region.latitude),
+            latitude: Number(region.latitude),
             longitude: Number(region.longitude),
-            latitudeDelta:0.0922,
+            latitudeDelta: 0.0922,
             longitudeDelta: 0.0421
           }}
         >
-          <Marker 
+          <Marker
             coordinate={{
               latitude: Number(region.latitude),
               longitude: Number(region.longitude),
-              
+
             }}
           />
         </MapView>
 
       }
-      <Button title="Confirmar" onPress={handleConfirm}  style={{marginBottom: 60, }}/>
-     
+      <Button title="Confirmar" onPress={handleConfirm} style={{ marginBottom: 60, }} />
+
     </Container>
   );
 }

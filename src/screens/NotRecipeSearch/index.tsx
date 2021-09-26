@@ -31,14 +31,13 @@ interface RemedyData {
 }
 
 
-export function RecipeSearch() {
+export function NotRecipeSearch() {
   const [search, setSearch] = useState('');
   const [remedy, setRemedy] = useState<RemedyData[]>([]);
   const [myList, setMyList] = useState<RemedyData[]>([]);
   const [checked, setChecked] = useState(false);
 
   const navigation = useNavigation();
-
 
   const { token } = useContext(AuthContext);
 
@@ -50,7 +49,7 @@ export function RecipeSearch() {
     };
 
     axios.get(
-      `https://farmappapi.herokuapp.com/api/Produto?IdTipoProduto=1&Busca=${search}%20`,
+      `https://farmappapi.herokuapp.com/api/Produto?IdTipoProduto=2&Busca=${search}`,
       config
     ).then((json) =>
       json.status === 200
@@ -67,7 +66,7 @@ export function RecipeSearch() {
 
   function handleRegister(data: string) {
     setChecked(true)
-    console.log(data)
+    console.log('data')
   }
 
   function handleDrawer() {

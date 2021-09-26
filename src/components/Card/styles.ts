@@ -1,8 +1,8 @@
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
 
-export const Container = styled.View`
-  height: 5%;
+export const Container = styled.TouchableOpacity`
+  height: 60%;
   
   margin: 0 25px;
   justify-content: space-between;
@@ -10,6 +10,7 @@ export const Container = styled.View`
   flex-direction: row;
   
   margin-bottom: 40px;
+  flex-wrap: wrap;
 `;
 
 export const IconImage = styled.Image`
@@ -19,5 +20,6 @@ export const IconImage = styled.Image`
 `;
 
 export const Title = styled.Text`
-  font-size: ${RFValue(25)}px;
+  font-size: ${RFValue(18)}px;
+  
 `;
