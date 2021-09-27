@@ -2,12 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import {
   Container,
-  Header,
-  ContainerDrawer,
-  ImagemDrawer,
-  Imagem,
-  ButtonSync,
-  ImagemSync,
   ContainerSearch,
   InputSearch,
   ButtonSearch,
@@ -17,13 +11,11 @@ import {
   List
 } from './styles';
 
-import LogoImage from '../../assets/logo.png';
-import DrawerImage from '../../assets/drawer.png';
-import SyncImage from '../../assets/sync.png';
 import { Card } from '../../components/Card';
 import { AuthContext } from '../../providers/auth';
 import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
+import { Header } from '../../components/Header';
 
 interface RemedyData {
   idProdutoMarca: string;
@@ -78,19 +70,7 @@ export function NotRecipeSearch() {
   }, [checked])
   return (
     <Container>
-      <Header>
-        <ContainerDrawer
-          onPress={handleDrawer}
-        >
-          <ImagemDrawer source={DrawerImage} />
-        </ContainerDrawer>
-        <Imagem source={LogoImage} />
-        <ButtonSync
-          onPress={handleSync}
-        >
-          <ImagemSync source={SyncImage} />
-        </ButtonSync>
-      </Header>
+      <Header />
 
       <ContainerSearch>
         <InputSearch

@@ -2,12 +2,6 @@ import React, { useContext, useEffect, useState } from 'react';
 
 import {
   Container,
-  Header,
-  ContainerDrawer,
-  ImagemDrawer,
-  Imagem,
-  ButtonSync,
-  ImagemSync,
   ContainerSearch,
   InputSearch,
   ButtonSearch,
@@ -17,13 +11,11 @@ import {
   List
 } from './styles';
 
-import LogoImage from '../../assets/logo.png';
-import DrawerImage from '../../assets/drawer.png';
-import SyncImage from '../../assets/sync.png';
+
 import { Card } from '../../components/Card';
 import { AuthContext } from '../../providers/auth';
 import axios from 'axios';
-import { useNavigation } from '@react-navigation/native';
+import { Header } from '../../components/Header';
 
 interface RemedyData {
   idProdutoMarca: string;
@@ -36,8 +28,6 @@ export function RecipeSearch() {
   const [remedy, setRemedy] = useState<RemedyData[]>([]);
   const [myList, setMyList] = useState<RemedyData[]>([]);
   const [checked, setChecked] = useState(false);
-
-  const navigation = useNavigation();
 
 
   const { token } = useContext(AuthContext);
@@ -61,37 +51,21 @@ export function RecipeSearch() {
       .catch(console.log);
   }
 
-  function handleSync() {
-    // search.filter()
-  }
+
 
   function handleRegister(data: string) {
     setChecked(true)
     console.log(data)
   }
 
-  function handleDrawer() {
-    navigation.openDrawer();
-  }
+
 
   useEffect(() => {
     console.log(checked)
   }, [checked])
   return (
     <Container>
-      <Header>
-        <ContainerDrawer
-          onPress={handleDrawer}
-        >
-          <ImagemDrawer source={DrawerImage} />
-        </ContainerDrawer>
-        <Imagem source={LogoImage} />
-        <ButtonSync
-          onPress={handleSync}
-        >
-          <ImagemSync source={SyncImage} />
-        </ButtonSync>
-      </Header>
+      <Header />
 
       <ContainerSearch>
         <InputSearch

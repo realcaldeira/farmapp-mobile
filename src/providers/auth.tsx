@@ -9,10 +9,10 @@ interface Props {
 
 export const AuthProvider = ({ children }: Props) => {
   const [token, setToken] = useState('');
-  const [list, setList] = useState([]);
+
 
   return (
-    <AuthContext.Provider value={{ token, setToken, list, setList }}>
+    <AuthContext.Provider value={{ token, setToken }}>
       {children}
     </AuthContext.Provider>
   )

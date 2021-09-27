@@ -29,7 +29,7 @@ export function AccessLocation() {
   const { token } = useContext(AuthContext);
 
   var decoded = jwt_decode(token);
-  console.log(decoded)
+
 
   const getCurrentPosition = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
