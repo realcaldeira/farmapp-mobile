@@ -2,16 +2,18 @@ import React, { useContext } from 'react';
 import { Alert, StatusBar } from 'react-native';
 import { api } from '../../services/api';
 
-import { Keyboard,TouchableWithoutFeedback } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import { useForm } from 'react-hook-form';
-import Logo from '../../assets/logo.png';
+// import Logo from '../../assets/logo.png';
+import Logo from '../../assets/LogoSvg.svg';
 import { Button } from '../../components/Button';
 import { InputForm } from '../../components/InputForm';
 import * as Yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup'
 import { Container, Imagem, Form, Password, PasswordTitle, CreateAnAccount, CreateAnAccountTitle } from './styles';
 import { AuthContext } from '../../providers/auth';
+import { RFValue } from 'react-native-responsive-fontsize';
 
 interface FormData {
   login: string;
@@ -20,21 +22,21 @@ interface FormData {
 
 const schema = Yup.object().shape({
   login: Yup
-  .string()
-  .required('Nome é obrigatório.'),
+    .string()
+    .required('Nome é obrigatório.'),
   password: Yup
-  .string()
-  .required('Senha é obrigatório'),
+    .string()
+    .required('Senha é obrigatório'),
 })
 
 export function Login() {
-  
+
 
   const navigation = useNavigation();
 
-  const {setToken}  = useContext(AuthContext);
+  const { setToken } = useContext(AuthContext);
 
-  const { 
+  const {
     control,
     handleSubmit,
     formState: { errors }
@@ -42,28 +44,28 @@ export function Login() {
     resolver: yupResolver(schema)
   });
 
-  async function handleLogin(form: FormData){
+  async function handleLogin(form: FormData) {
     const data = {
       login: form.login,
       password: form.password
     }
-    
+
     try {
       const response = await api.post(`/Login?login=${data.login}&senha=${data.password}`);
-      if(response.data.token.length > 0){
-        
+      if (response.data.token.length > 0) {
+
         Alert.alert("Acesso liberado")
-  
+
         setToken(response.data.token);
       }
-    } catch (error){
+    } catch (error) {
       console.log(error)
       Alert.alert("Acesso negado")
     }
 
   }
 
-  function createAccount(){
+  function createAccount() {
     navigation.navigate('NewAccountPersonal')
   }
 
@@ -74,48 +76,48 @@ export function Login() {
 
 
   return (
-        <TouchableWithoutFeedback  onPress={Keyboard.dismiss} > 
-          <Container>
-            <StatusBar 
-              barStyle="light-content"
-              backgroundColor="transparent"
-              translucent
-            />
-              <Imagem source={Logo}/>
-            <Form>
-                <InputForm 
-                  name="login"
-                  texto="Login"
-                  control={control}
-                  placeholder="Login"
-                  error={errors.login && errors.login.message}
-                />
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} >
+      <Container>
+        <StatusBar
+          barStyle="light-content"
+          backgroundColor="transparent"
+          translucent
+        />
+        <Logo height={RFValue(270)} width={RFValue(150)} />
+        <Form>
+          <InputForm
+            name="login"
+            texto="Login"
+            control={control}
+            placeholder="Login"
+            error={errors.login && errors.login.message}
+          />
 
-                <InputForm
-                  name="password"
-                  texto="Senha"
-                  control={control}
-                  placeholder="Senha"
-                  secureTextEntry={true}
-                  error={errors.password && errors.password.message}
-                />
+          <InputForm
+            name="password"
+            texto="Senha"
+            control={control}
+            placeholder="Senha"
+            secureTextEntry={true}
+            error={errors.password && errors.password.message}
+          />
 
-                <Button title="Entrar" onPress={handleSubmit(handleLogin)} />
+          <Button title="Entrar" onPress={handleSubmit(handleLogin)} />
 
-              <Password>
-                <PasswordTitle>Esqueci minha senha</PasswordTitle>
-              </Password>
-          </Form>
+          <Password>
+            <PasswordTitle>Esqueci minha senha</PasswordTitle>
+          </Password>
+        </Form>
 
-            <CreateAnAccount>
-              <CreateAnAccountTitle
-                 onPress={createAccount}
-              >
-                Cadastrar conta
-            </CreateAnAccountTitle>
-            </CreateAnAccount>
-          </Container>
-        </TouchableWithoutFeedback >
-  
+        <CreateAnAccount>
+          <CreateAnAccountTitle
+            onPress={createAccount}
+          >
+            Cadastrar conta
+          </CreateAnAccountTitle>
+        </CreateAnAccount>
+      </Container>
+    </TouchableWithoutFeedback >
+
   );
 }

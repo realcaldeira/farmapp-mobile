@@ -9,7 +9,7 @@ import {
 
 import { Feather, Ionicons } from '@expo/vector-icons';
 
-import LogoImage from '../../assets/logo.png';
+import LogoImage from '../../assets/LogoSvg.svg';
 
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -34,17 +34,17 @@ export function Header() {
         <Feather
           name="menu"
           size={RFValue(32)}
-          color="#000"
+          color="#1C2139"
         />
       </ContainerDrawer>
-      <Imagem source={LogoImage} />
+      <LogoImage width={RFValue(120)} height={RFValue(100)} fill="#1C2139" />
       <ButtonSync
         onPress={handleSync}
       >
         <Ionicons
           name="sync-circle-sharp"
           size={RFValue(40)}
-          color="#000"
+          color="#1C2139"
         />
       </ButtonSync>
     </Container>
