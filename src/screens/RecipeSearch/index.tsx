@@ -25,12 +25,12 @@ interface RemedyData {
 
 export function RecipeSearch() {
   const [search, setSearch] = useState('');
-  const [remedy, setRemedy] = useState<RemedyData[]>([]);
-  const [myList, setMyList] = useState<RemedyData[]>([]);
+  const [data, setData] = useState<RemedyData[]>([]);
+  // const [myList, setMyList] = useState<RemedyData[]>([]);
   const [checked, setChecked] = useState(false);
 
 
-  const { token } = useContext(AuthContext);
+  const { token, list } = useContext(AuthContext);
 
   function handleSearch() {
     // Alert.alert(search);
@@ -45,8 +45,8 @@ export function RecipeSearch() {
     ).then((json) =>
       json.status === 200
         ?
-        // console.log(json.data)
-        setRemedy(json.data[0].descricao)
+        // console.log(json.data[0])
+        setData(json.data[0])
         : '')
       .catch(console.log);
   }
@@ -55,13 +55,14 @@ export function RecipeSearch() {
 
   function handleRegister(data: string) {
     setChecked(true)
-    console.log(data)
   }
-
-
 
   useEffect(() => {
     console.log(checked)
+    console.log(data)
+    console.log('list')
+    console.log(list)
+
   }, [checked])
   return (
     <Container>
@@ -85,20 +86,21 @@ export function RecipeSearch() {
       </ContainerAddToList>
 
 
-      {remedy.length > 0 &&
-        <List
-          data={[remedy]}
-          keyExtractor={item => String(item)}
-          renderItem={({ item }) => (
-            <Card
-              title={String(item)}
-              checked={!checked}
-              onPress={() => handleRegister(item)}
-            // onPress={() => setChecked(!checked)}
-            />
-          )}
-        />
-      }
+      {/* {data. && */}
+      <List
+        data={[data]}
+        keyExtractor={item => String(item.idProdutoMarca)}
+        renderItem={({ item }) => (
+          <Card
+            title={item.descricao}
+            checked={!checked}
+            onPress={() => handleRegister(item)}
+            value={item}
+          // onPress={() => setChecked(!checked)}
+          />
+        )}
+      />
+      {/* } */}
 
     </Container>
   );

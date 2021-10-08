@@ -30,7 +30,7 @@ export function MyList({ route }: Routes) {
   const [item, setItem] = useState('');
   const [data, setData] = useState<ListData[]>([]);
 
-  const remedios = route.params?.title;
+  const remedios = route?.params?.title;
 
   const navigation = useNavigation();
 
@@ -49,12 +49,7 @@ export function MyList({ route }: Routes) {
     setData(oldState => [...oldState, data]);
   }
 
-  function handleGoBack() {
-    navigation.goBack();
-  }
-
   useEffect(() => {
-
     handleAddMyList();
     // console.log(list)
     console.log('data')
@@ -67,7 +62,6 @@ export function MyList({ route }: Routes) {
 
       <ContainerBody>
 
-
         {/* <FlatList
           data={list}
           keyExtractor={item => item.id}
@@ -78,8 +72,6 @@ export function MyList({ route }: Routes) {
         /> */}
         <Title>{remedios}</Title>
       </ContainerBody>
-
-
     </Container>
   );
 }

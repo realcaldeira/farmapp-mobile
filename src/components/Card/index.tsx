@@ -1,28 +1,54 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import { Container, IconImage, Title } from './styles';
 
 import Icon from '../../assets/icon.png'
 
 import { CheckBox } from 'react-native-elements';
-import { useNavigation } from '@react-navigation/core';
+import { Alert } from 'react-native';
+import { AuthContext } from '../../providers/auth';
 interface Props {
   title: string;
   checked: boolean;
   // setChecked: () => void;
+  value: Object;
   onPress?: () => void;
 }
 
-export function Card({ title, onPress, checked, ...rest }: Props) {
+export function Card({ title, onPress, checked, value, ...rest }: Props) {
+  const { setList, list } = useContext(AuthContext);
 
   const [checke, setChecke] = useState(false);
-
-  const navigation = useNavigation();
+  const [item, setItem] = useState([]);
 
   function handleRegister() {
     setChecke(true);
-    navigation.navigate('MyList', { title })
+
+    const data = {
+      id: value?.idProdutoMarca,
+      name: value?.descricao
+    }
+
+    setItem(oldState => [...oldState, data]);
+    console.log('********************************************')
+
+    const hasRemedy = item.some(iten => iten.id === data.id)
+
+    if (hasRemedy) {
+      Alert.alert('ESSE REMÉDIO JÁ FOI ADICIONADO')
+      return
+    } else {
+      console.log('ADD');
+      setList(data)
+      console.log(list);
+      return
+    }
+
   }
+
+  useEffect(() => {
+
+  }, [item])
 
   return (
     <Container {...rest}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
   Container,
@@ -13,9 +13,10 @@ import LogoImage from '../../assets/LogoSvg.svg';
 
 import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { AuthContext } from '../../providers/auth';
 
 export function Header() {
-
+  const { list } = useContext(AuthContext);
   const navigation = useNavigation();
 
   function handleSync() {

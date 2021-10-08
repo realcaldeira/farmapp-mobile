@@ -30,10 +30,7 @@ const schema = Yup.object().shape({
 })
 
 export function Login() {
-
-
   const navigation = useNavigation();
-
   const { setToken } = useContext(AuthContext);
 
   const {
