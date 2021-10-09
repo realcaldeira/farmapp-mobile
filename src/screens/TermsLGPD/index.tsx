@@ -60,7 +60,7 @@ export function TermsLGPD() {
       repeteSenha: data.passwordRepeat,
       cpf: data.cpf,
       dataNascimento: data.birthDay,
-      celular: ' ',
+      celular: ' 212121',
       cep: data.cep,
       uf: data.uf,
       cidade: data.localidade,

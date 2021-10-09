@@ -29,7 +29,7 @@ export function AppDrawerRoutes() {
         drawerInactiveTintColor: '#FFF',
 
       }}
-      initialRouteName="AccessLocation"
+      initialRouteName="Home"
     >
       <Screen
         name="Inicio"
@@ -45,25 +45,12 @@ export function AppDrawerRoutes() {
           )
         }}
       />
-      <Screen
-        name="Localização"
-        component={AccessLocation}
-        options={{
-          title: 'Localização',
-          drawerIcon: ({ size, color }) => (
-            <MaterialIcons
-              name="gps-fixed"
-              size={size}
-              color={color}
-            />
-          )
-        }}
-      />
+
       <Screen
         name="Medicamentos com receita"
         component={RecipeSearch}
         options={{
-          title: 'Medicamentos com receita',
+          title: 'Com receita',
           drawerIcon: ({ size, color }) => (
             <AntDesign
               name="medicinebox"
@@ -77,7 +64,7 @@ export function AppDrawerRoutes() {
         name="Medicamentos sem receita"
         component={NotRecipeSearch}
         options={{
-          title: 'Medicamentos sem receita',
+          title: 'Sem receita',
           drawerIcon: ({ size, color }) => (
             <AntDesign
               name="medicinebox"
@@ -95,6 +82,21 @@ export function AppDrawerRoutes() {
           drawerIcon: ({ size, color }) => (
             <MaterialIcons
               name="stars"
+              size={size}
+              color={color}
+            />
+          )
+        }}
+      />
+
+      <Screen
+        name="Localização"
+        component={AccessLocation}
+        options={{
+          title: 'Localização',
+          drawerIcon: ({ size, color }) => (
+            <MaterialIcons
+              name="gps-fixed"
               size={size}
               color={color}
             />

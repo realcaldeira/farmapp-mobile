@@ -1,5 +1,4 @@
 import React from 'react';
-import { Header } from '../../components/Header';
 
 import {
   Container,
@@ -10,11 +9,8 @@ import {
 export function Home() {
 
   return (
-    <>
-      <Header />
-      <Container>
-        <Title>HOME</Title>
-      </Container>
-    </>
+    <Container>
+      <Title>HOME</Title>
+    </Container>
   )
 }
