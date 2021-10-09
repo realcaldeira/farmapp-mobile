@@ -14,6 +14,7 @@ export const AuthProvider = ({ children }: Props) => {
   useEffect(() => {
     console.log('list teste')
     console.log(list)
+    console.log(list.length)
   }, [])
 
   return (

@@ -115,6 +115,5 @@ export function Login() {
         </CreateAnAccount>
       </Container>
     </TouchableWithoutFeedback >
-
   );
 }

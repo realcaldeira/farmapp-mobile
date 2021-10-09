@@ -52,7 +52,7 @@ export function MyList({ route }: Routes) {
     ).then((json) =>
       json.status === 200
         ?
-        // console.log(json.data)
+        // console.log(json.data.length)
         setData(json.data)
         : '')
       .catch(console.log);
@@ -67,7 +67,6 @@ export function MyList({ route }: Routes) {
   return (
     <Container>
       <Header />
-
       <ContainerBody>
 
         <FlatList
@@ -80,7 +79,6 @@ export function MyList({ route }: Routes) {
             </>
           )}
         />
-
       </ContainerBody>
     </Container>
   );

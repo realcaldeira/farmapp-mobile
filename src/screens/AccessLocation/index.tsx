@@ -9,6 +9,7 @@ import { CheckBox } from 'react-native-elements';
 import { Alert } from 'react-native';
 import { Button } from '../../components/Button';
 import { AuthContext } from '../../providers/auth';
+import { useNavigation } from '@react-navigation/core';
 
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
@@ -25,7 +26,7 @@ export function AccessLocation() {
   const [location, setLocation] = useState(true);
   const [region, setRegion] = useState<Location>({});
 
-
+  const navigation = useNavigation();
   const { token } = useContext(AuthContext);
 
   var decoded = jwt_decode(token);
@@ -35,7 +36,6 @@ export function AccessLocation() {
 
     if (status !== "granted") {
       Alert.alert("Ops!", "Permissão de acesso a localização negada.");
-
     } else {
       let {
         coords: { latitude, longitude },
@@ -80,9 +80,14 @@ export function AccessLocation() {
     ).then((json) =>
       json.status === 200
         ?
-        Alert.alert('DADOS SALVOS COM SUCESSO')
+        authAcess()
         : '')
       .catch(console.log);
+  }
+
+  function authAcess() {
+    Alert.alert('DADOS SALVOS COM SUCESSO');
+    navigation.navigate('Home')
   }
 
   return (

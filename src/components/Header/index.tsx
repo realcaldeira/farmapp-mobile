@@ -17,6 +17,7 @@ import { AuthContext } from '../../providers/auth';
 
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import { Alert } from 'react-native';
 
 export function Header() {
   const { list, token } = useContext(AuthContext);
@@ -46,7 +47,7 @@ export function Header() {
     ).then((json) =>
       json.status === 200
         ?
-        console.log('DADOS SALVOS COM SUCESSO')
+        Alert.alert('DADOS SALVOS COM SUCESSO')
         : '')
       .catch(console.log);
   }

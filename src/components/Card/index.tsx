@@ -22,32 +22,24 @@ export function Card({ title, onPress, checked, value, ...rest }: Props) {
   const [item, setItem] = useState([]);
 
   function handleRegister() {
-    setChecke(true);
-
     const data = {
       id: value?.idProdutoMarca,
       name: value?.descricao
     }
-
-    setItem(oldState => [...oldState, data]);
-    console.log('********************************************')
-
-    const hasRemedy = item.some(iten => iten.id === data.id)
-
-    if (hasRemedy) {
-      Alert.alert('ESSE REMÉDIO JÁ FOI ADICIONADO')
-      // console.log(list)
+    if (!checke) {
+      setItem(oldState => [...oldState, data]);
     } else {
-      console.log('ADD');
-      // setList(item)
-      console.log(list);
-      return
+      Alert.alert('ESSE REMÉDIO JÁ FOI ADICIONADO')
     }
 
+    console.log('********************************************')
+
+    console.log(item)
+    console.log(item.length)
+    setChecke(true);
   }
 
   useEffect(() => {
-    console.log(item.length)
     setList(item)
   }, [item])
 
