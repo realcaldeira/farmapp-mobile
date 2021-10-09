@@ -31,7 +31,7 @@ interface ListData {
 }
 
 export function MyList({ route }: Routes) {
-  const [item, setItem] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState<RemedyData[]>([]);
 
   const { token, list } = useContext(AuthContext);
@@ -56,13 +56,12 @@ export function MyList({ route }: Routes) {
         setData(json.data)
         : '')
       .catch(console.log);
+
+    setLoading(false);
   }
 
   useEffect(() => {
     handleAddMyList();
-    console.log(data)
-    console.log(data.descricao)
-
   }, [])
 
   return (
@@ -73,14 +72,14 @@ export function MyList({ route }: Routes) {
 
         <FlatList
           data={data}
-          keyExtractor={item => item.id}
+          keyExtractor={(item, id) => item.id}
           renderItem={({ item }) => (
             <>
               <Title>{String(item.descricao)}</Title>
             </>
           )}
         />
-        {/* <Title>REMEDIOS</Title> */}
+
       </ContainerBody>
     </Container>
   );
