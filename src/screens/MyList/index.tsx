@@ -9,10 +9,14 @@ import {
 import { FlatList } from 'react-native';
 import { useNavigation } from '@react-navigation/core';
 import { Header } from '../../components/Header';
+import axios from 'axios';
+import { AuthContext } from '../../providers/auth';
+import jwt_decode from "jwt-decode";
+import { ScrollView } from 'react-native-gesture-handler';
 
 
 interface RemedyData {
-  idProdutoMarca: string;
+  id: string;
   descricao: string;
 }
 
@@ -27,33 +31,38 @@ interface ListData {
 }
 
 export function MyList({ route }: Routes) {
-  const [item, setItem] = useState('');
-  const [data, setData] = useState<ListData[]>([]);
+  const [item, setItem] = useState([]);
+  const [data, setData] = useState<RemedyData[]>([]);
 
-  const remedios = route?.params?.title;
-
-  const navigation = useNavigation();
-
+  const { token, list } = useContext(AuthContext);
+  var decoded = jwt_decode(token);
 
   function handleSync() {
     // search.filter()
   }
 
   function handleAddMyList() {
-    setItem(remedios)
-    const data = {
-      id: String(new Date().getTime()),
-      name: remedios
-    }
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
 
-    setData(oldState => [...oldState, data]);
+    axios.get(
+      `https://farmappapi.herokuapp.com/api/ItemCliente/GetAll?idCliente=${decoded.IdCliente}`,
+      config
+    ).then((json) =>
+      json.status === 200
+        ?
+        // console.log(json.data)
+        setData(json.data)
+        : '')
+      .catch(console.log);
   }
 
   useEffect(() => {
     handleAddMyList();
-    // console.log(list)
-    console.log('data')
-    console.log(remedios)
+    console.log(data)
+    console.log(data.descricao)
+
   }, [])
 
   return (
@@ -62,18 +71,17 @@ export function MyList({ route }: Routes) {
 
       <ContainerBody>
 
-        {/* <FlatList
-          data={list}
+        <FlatList
+          data={data}
           keyExtractor={item => item.id}
-          renderItem={(item) => (
-            <Title>{list}</Title>
-
+          renderItem={({ item }) => (
+            <>
+              <Title>{String(item.descricao)}</Title>
+            </>
           )}
-        /> */}
-        <Title>{remedios}</Title>
+        />
+        {/* <Title>REMEDIOS</Title> */}
       </ContainerBody>
     </Container>
   );
 }
-
-

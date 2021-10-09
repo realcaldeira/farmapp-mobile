@@ -85,21 +85,21 @@ export function RecipeSearch() {
       </ContainerAddToList>
 
 
-      {/* {data. && */}
-      <List
-        data={[data]}
-        keyExtractor={item => String(item.idProdutoMarca)}
-        renderItem={({ item }) => (
-          <Card
-            title={item.descricao}
-            checked={!checked}
-            onPress={() => handleRegister(item)}
-            value={item}
-          // onPress={() => setChecked(!checked)}
-          />
-        )}
-      />
-      {/* } */}
+      {data.descricao &&
+        <List
+          data={[data]}
+          keyExtractor={item => String(item.idProdutoMarca)}
+          renderItem={({ item }) => (
+            <Card
+              title={item.descricao}
+              checked={!checked}
+              onPress={() => handleRegister(item)}
+              value={item}
+            // onPress={() => setChecked(!checked)}
+            />
+          )}
+        />
+      }
 
     </Container>
   );

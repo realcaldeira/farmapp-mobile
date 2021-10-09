@@ -25,13 +25,10 @@ interface RemedyData {
 
 export function NotRecipeSearch() {
   const [search, setSearch] = useState('');
-  const [remedy, setRemedy] = useState<RemedyData[]>([]);
-  const [myList, setMyList] = useState<RemedyData[]>([]);
+  const [data, setData] = useState<RemedyData[]>([]);
   const [checked, setChecked] = useState(false);
 
-  const navigation = useNavigation();
-
-  const { token } = useContext(AuthContext);
+  const { token, list } = useContext(AuthContext);
 
   function handleSearch() {
     // Alert.alert(search);
@@ -46,14 +43,10 @@ export function NotRecipeSearch() {
     ).then((json) =>
       json.status === 200
         ?
-        // console.log(json.data)
-        setRemedy(json.data[0].descricao)
+        // console.log(json.data[0])
+        setData(json.data[0])
         : '')
       .catch(console.log);
-  }
-
-  function handleSync() {
-    // search.filter()
   }
 
   function handleRegister(data: string) {
@@ -61,13 +54,12 @@ export function NotRecipeSearch() {
     console.log('data')
   }
 
-  function handleDrawer() {
-    navigation.openDrawer();
-  }
 
   useEffect(() => {
-    console.log(checked)
-  }, [checked])
+    console.log('list')
+    console.log(list)
+    console.log(data.descricao)
+  }, [checked, data])
   return (
     <Container>
       <Header />
@@ -90,15 +82,16 @@ export function NotRecipeSearch() {
       </ContainerAddToList>
 
 
-      {remedy.length > 0 &&
+      {data.descricao &&
         <List
-          data={[remedy]}
-          keyExtractor={item => String(item)}
+          data={[data]}
+          keyExtractor={item => String(item.idProdutoMarca)}
           renderItem={({ item }) => (
             <Card
-              title={String(item)}
+              title={item.descricao}
               checked={!checked}
               onPress={() => handleRegister(item)}
+              value={item}
             // onPress={() => setChecked(!checked)}
             />
           )}
