@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import {
   Container,
@@ -15,17 +15,48 @@ import { useNavigation } from '@react-navigation/native';
 import { RFValue } from 'react-native-responsive-fontsize';
 import { AuthContext } from '../../providers/auth';
 
+import jwt_decode from "jwt-decode";
+import axios from 'axios';
+
 export function Header() {
-  const { list } = useContext(AuthContext);
+  const { list, token } = useContext(AuthContext);
   const navigation = useNavigation();
 
-  function handleSync() {
-    // search.filter()
+  var decoded = jwt_decode(token);
+
+  async function handleSync() {
+
+    // var convertList = list.split(',').map(Number);
+
+    const config = {
+      headers: { Authorization: `Bearer ${token}` }
+    };
+
+    const bodyParameters = {
+      IdCliente: parseInt(decoded.IdCliente),
+      IdsProdutoMarca: 0
+    };
+
+    axios.post(
+      'https://farmappapi.herokuapp.com/api/ItemCliente/Add',
+      bodyParameters,
+      config
+    ).then((json) =>
+      json.status === 200
+        ?
+        console.log('DADOS SALVOS COM SUCESSO')
+        : '')
+      .catch(console.log);
   }
 
   function handleDrawer() {
     navigation.openDrawer();
   }
+
+  useEffect(() => {
+    console.log(list.length)
+    console.log(decoded.IdCliente)
+  }, [])
 
   return (
     <Container>

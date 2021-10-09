@@ -30,7 +30,6 @@ export function AccessLocation() {
 
   var decoded = jwt_decode(token);
 
-
   const getCurrentPosition = async () => {
     let { status } = await Location.requestForegroundPermissionsAsync();
 

@@ -58,8 +58,7 @@ export function RecipeSearch() {
   }
 
   useEffect(() => {
-    console.log(checked)
-    console.log(data)
+
     console.log('list')
     console.log(list)
 
