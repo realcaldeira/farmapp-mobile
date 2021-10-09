@@ -51,16 +51,14 @@ export function RecipeSearch() {
       .catch(console.log);
   }
 
-
-
   function handleRegister(data: string) {
     setChecked(true)
   }
 
   useEffect(() => {
 
-    console.log('list')
-    console.log(list)
+    console.log('data')
+    console.log(data)
 
   }, [checked])
   return (

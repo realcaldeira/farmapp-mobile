@@ -24,18 +24,20 @@ export function Header() {
 
   var decoded = jwt_decode(token);
 
+
+
   async function handleSync() {
-
-    // var convertList = list.split(',').map(Number);
-
+    const numbers = list.map((number) => number.id)
     const config = {
       headers: { Authorization: `Bearer ${token}` }
     };
 
     const bodyParameters = {
       IdCliente: parseInt(decoded.IdCliente),
-      IdsProdutoMarca: 0
+      IdsProdutoMarca: numbers
     };
+
+    console.log(bodyParameters)
 
     axios.post(
       'https://farmappapi.herokuapp.com/api/ItemCliente/Add',
@@ -54,8 +56,7 @@ export function Header() {
   }
 
   useEffect(() => {
-    console.log(list.length)
-    console.log(decoded.IdCliente)
+
   }, [])
 
   return (

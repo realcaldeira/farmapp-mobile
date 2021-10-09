@@ -1,4 +1,4 @@
-import React, { createContext, ReactNode, useState } from 'react';
+import React, { createContext, ReactNode, useEffect, useState } from 'react';
 
 export const AuthContext = createContext({});
 
@@ -11,6 +11,10 @@ export const AuthProvider = ({ children }: Props) => {
   const [token, setToken] = useState('');
   const [list, setList] = useState([]);
 
+  useEffect(() => {
+    console.log('list teste')
+    console.log(list)
+  }, [])
 
   return (
     <AuthContext.Provider value={{ token, setToken, list, setList }}>

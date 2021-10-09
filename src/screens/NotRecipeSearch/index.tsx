@@ -58,7 +58,6 @@ export function NotRecipeSearch() {
   useEffect(() => {
     console.log('list')
     console.log(list)
-    console.log(data.descricao)
   }, [checked, data])
   return (
     <Container>

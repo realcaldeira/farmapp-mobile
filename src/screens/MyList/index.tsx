@@ -72,7 +72,8 @@ export function MyList({ route }: Routes) {
 
         <FlatList
           data={data}
-          keyExtractor={(item, id) => item.id}
+          keyExtractor={(item) => item.id}
+          showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
             <>
               <Title>{String(item.descricao)}</Title>

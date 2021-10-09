@@ -37,10 +37,9 @@ export function Card({ title, onPress, checked, value, ...rest }: Props) {
     if (hasRemedy) {
       Alert.alert('ESSE REMÉDIO JÁ FOI ADICIONADO')
       // console.log(list)
-      return
     } else {
       console.log('ADD');
-      setList(item)
+      // setList(item)
       console.log(list);
       return
     }
@@ -48,7 +47,8 @@ export function Card({ title, onPress, checked, value, ...rest }: Props) {
   }
 
   useEffect(() => {
-
+    console.log(item.length)
+    setList(item)
   }, [item])
 
   return (
