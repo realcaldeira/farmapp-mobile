@@ -63,7 +63,7 @@ export function Login() {
   }
 
   function createAccount() {
-    navigation.navigate('NewAccountPersonal')
+    navigation.navigate('PersonalOrPharmacy')
   }
 
   // IMPLEMENTAR UNIDADE 2

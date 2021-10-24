@@ -5,20 +5,24 @@ import { useNavigation } from '@react-navigation/native';
 import Logo from '../../assets/logo.png';
 import { Button } from '../../components/Button';
 
+import {
+  Linking
+} from 'react-native';
 
-import { Container, Imagem, ContainerContent, Title, ContainerButton, DivButton} from './styles';
+
+import { Container, Imagem, ContainerContent, Title, ContainerButton, DivButton } from './styles';
 
 export function PersonalOrPharmacy() {
   const navigation = useNavigation();
 
-  function handleLogin(){
+  function handleLogin() {
 
   }
 
-  function handlePersonal(){
+  function handlePersonal() {
     navigation.navigate('NewAccountPersonal')
   }
-  function handlePharmacy(){
+  function handlePharmacy() {
     navigation.navigate('NewAccountPharmacy')
   }
 
@@ -26,32 +30,31 @@ export function PersonalOrPharmacy() {
 
 
   return (
-      
-          <Container>
-            <StatusBar 
-              barStyle="light-content"
-              backgroundColor="transparent"
-              translucent
-            />
-              <Imagem source={Logo}/>
-           
-           <ContainerContent>
-            <Title>Você deseja criar uma conta </Title>
-            <ContainerButton>
+
+    <Container>
+      <StatusBar
+        barStyle="light-content"
+        backgroundColor="transparent"
+        translucent
+      />
+      <Imagem source={Logo} />
+
+      <ContainerContent>
+        <Title>Você deseja criar uma conta </Title>
+        <ContainerButton>
 
 
-              <DivButton>
-                <Button title="Pessoal ?" onPress={handlePersonal} />
+          <DivButton>
+            <Button title="Pessoal ?" onPress={handlePersonal} />
 
-              </DivButton>
+          </DivButton>
 
-            
-              {/* <DivButton>
-                <Button  title="Farmácia ?" onPress={handlePharmacy} />
-              </DivButton>
-               */}
-            </ContainerButton>
-           </ContainerContent>
-          </Container>
+          <DivButton>
+            <Button title="Farmácia ?" onPress={() => Linking.openURL('https://farmappfront.herokuapp.com/')} />
+          </DivButton>
+
+        </ContainerButton>
+      </ContainerContent>
+    </Container>
   );
 }

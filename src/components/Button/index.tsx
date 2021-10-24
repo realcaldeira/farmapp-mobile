@@ -5,14 +5,14 @@ import theme from '../../styles/theme';
 import { Container, Title } from './styles';
 
 interface Props extends TouchableOpacityProps {
-  title: string;
+  title?: string;
   color?: string;
-  onPress: () => void;
+  onPress?: () => void;
 }
 
-export function Button({title, color, onPress, ...rest}: Props){
-  return(
-    <Container 
+export function Button({ title, color, onPress, ...rest }: Props) {
+  return (
+    <Container
       color={color ? color : theme.colors.background_others}
       onPress={onPress}
       {...rest}

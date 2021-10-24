@@ -53,14 +53,14 @@ export function TermsLGPD() {
     const { data } = route.params as Params;
     const { allCep } = route.params as ParamsEndereco;
 
-    const carDTO = {
+    const dataFull = {
       nome: data.name,
       email: data.email,
       senha: data.password,
       repeteSenha: data.passwordRepeat,
       cpf: data.cpf,
       dataNascimento: data.birthDay,
-      celular: ' 212121',
+      celular: ' ',
       cep: data.cep,
       uf: data.uf,
       cidade: data.localidade,
@@ -79,19 +79,21 @@ export function TermsLGPD() {
           'Content-Type': 'application/merge-patch+json'
         },
         url: 'https://farmappapi.herokuapp.com/api/Cliente',
-        data: carDTO
+        data: dataFull
       }).then(function (response) {
         if (response.status === 200) {
           navigation.navigate("Success");
+        } else {
+          console.log(response)
         }
       })
 
       console.log('PACOTE')
-      console.log(carDTO)
+      console.log(dataFull)
 
     } catch (error) {
       console.log(error)
-      console.log(carDTO)
+      console.log(dataFull)
       Alert.alert("ERRO.")
 
     }
