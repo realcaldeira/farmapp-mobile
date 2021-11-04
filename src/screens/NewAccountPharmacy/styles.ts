@@ -4,20 +4,18 @@ import styled from 'styled-components/native';
 
 export const Container = styled.View`
   height: 100%;
-  background-color: ${({ theme })=> theme.colors.background_primary};
+  background-color: ${({ theme }) => theme.colors.background_primary};
   justify-content: center;
   align-content: center;
-
-`;
+  
+  `;
 
 export const Header = styled.View`
   height: 10%;
   margin-top: ${getStatusBarHeight()}px;
 
-
   flex-direction: row;
   align-items: center;
-  
 `;
 
 export const Prev = styled.TouchableOpacity`
@@ -29,7 +27,7 @@ export const Prev = styled.TouchableOpacity`
   justify-content: center;
   align-items: center;
 
-  background-color: ${({ theme })=> theme.colors.background_tertiary};
+  background-color: ${({ theme }) => theme.colors.background_tertiary};
 
   border-radius: ${RFValue(22)}px;
 `;
@@ -37,7 +35,7 @@ export const Prev = styled.TouchableOpacity`
 export const PrevTitle = styled.Text`
   font-size: ${RFValue(20)}px;
 
-  color: ${({ theme })=> theme.colors.text};
+  color: ${({ theme }) => theme.colors.text};
 `;
 
 export const Imagem = styled.Image`
@@ -57,16 +55,22 @@ export const ContainerForm = styled.ScrollView.attrs({
     margin: 10,
     alignItems: 'center',
   },
-  showsVerticalScrollIndicator:false,
+  showsVerticalScrollIndicator: false,
 })`
-  width: ${RFValue(359)}px;
+  width: ${RFValue(350)}px;
   height: ${RFValue(561)}px;
   
-  background-color: ${({ theme })=> theme.colors.background_secondary};
+  background-color: ${({ theme }) => theme.colors.background_secondary};
   margin: 5%;
   
 
   border-radius: 10px;  
 `;
 
+export const ContainerCep = styled.View`
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+`;
 

@@ -5,10 +5,6 @@ import { useNavigation } from '@react-navigation/native';
 import Logo from '../../assets/logo.png';
 import { Button } from '../../components/Button';
 
-import {
-  Linking
-} from 'react-native';
-
 
 import { Container, Imagem, ContainerContent, Title, ContainerButton, DivButton } from './styles';
 
@@ -50,7 +46,7 @@ export function PersonalOrPharmacy() {
           </DivButton>
 
           <DivButton>
-            <Button title="Farmácia ?" onPress={() => Linking.openURL('https://farmappfront.herokuapp.com/')} />
+            <Button title="Farmácia ?" onPress={handlePharmacy} />
           </DivButton>
 
         </ContainerButton>
