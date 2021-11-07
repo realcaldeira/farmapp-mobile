@@ -1,5 +1,7 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
+import React, { useContext, useState } from 'react';
+import { Alert, StatusBar } from 'react-native';
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
 
 import { useForm } from 'react-hook-form';
 import { useNavigation } from '@react-navigation/native';
@@ -11,21 +13,23 @@ import { Container, Header, Imagem, Prev, PrevTitle, ContainerForm } from './sty
 import Logo from '../../assets/logo.png';
 import { InputForm } from '../../components/InputForm';
 import { Button } from '../../components/Button';
+import { AuthContext } from '../../providers/auth';
 
-interface FormData {
-  cnpj: string;
-  razaoSocial: string;
-  nomeFantasia: string;
-  alvaraDeFuncionamento: string;
-  numero: string;
-  password: string;
-  passwordRepeat: string;
-  cep: string;
-  endereco: string;
-  site: string;
-  email: string;
-  celular: string;
-}
+
+// interface FormData {
+//   cnpj: string;
+//   razaoSocial: string;
+//   nomeFantasia: string;
+//   alvaraDeFuncionamento: string;
+//   numero: string;
+//   password: string;
+//   passwordRepeat: string;
+//   cep: string;
+//   endereco: string;
+//   site: string;
+//   telefone?: string;
+//   celular: string;
+// }
 
 const schema = Yup.object().shape({
   cnpj: Yup
@@ -44,12 +48,6 @@ const schema = Yup.object().shape({
     .number()
     .typeError('O campo deve ser numérico')
     .required('Número é obrigatório'),
-  password: Yup
-    .string()
-    .required('Senha é obrigatório'),
-  passwordRepeat: Yup
-    .string()
-    .required('Repetição de senha é obrigatório'),
   cep: Yup
     .number()
     .typeError('O campo deve ser numérico')
@@ -57,9 +55,6 @@ const schema = Yup.object().shape({
   endereco: Yup
     .string()
     .required('Endereco é obrigatório'),
-  email: Yup
-    .string()
-    .required('E-mail é obrigatório'),
 
 })
 
@@ -67,42 +62,78 @@ const schema = Yup.object().shape({
 export function NewAccountPharmacy() {
   const navigation = useNavigation();
 
+  const { token } = useContext(AuthContext);
+  var decoded = jwt_decode(token);
+
+  const [cnpj, setCnpj] = useState('');
+  const [razaoSocial, setRazaoSocial] = useState('');
+  const [nomeFantasia, setNomeFantasia] = useState('');
+  const [alvaraF, setAlvaraF] = useState('');
+  const [numero, setNumero] = useState('');
+  const [cep, setCep] = useState('');
+  const [endereco, setEndereco] = useState('');
+  const [bairro, setBairro] = useState('');
+  const [cidade, setCidade] = useState('');
+  const [uf, setUf] = useState('');
+  const [site, setSite] = useState('');
+  const [telefone, setTelefone] = useState('');
+  const [celular, setCelular] = useState('');
+
   const {
     control,
-    handleSubmit,
     formState: { errors }
   } = useForm({
     resolver: yupResolver(schema)
   });
 
-  function handleRegister(form: FormData) {
-
-
-    const data = {
-
-      cnpj: form.cnpj,
-      razaoSocial: form.razaoSocial,
-      nomeFantasia: form.nomeFantasia,
-      alvaraDeFuncionamento: form.alvaraDeFuncionamento,
-      numero: form.numero,
-      password: form.password,
-      passwordRepeat: form.passwordRepeat,
-      cep: form.cep,
-      endereco: form.endereco,
-      site: form.site,
-      email: form.email,
-      // telefone: form.telefone,
-      celular: form.celular,
+  function handleRegister() {
+    const dataFull = {
+      cnpj: cnpj,
+      razaoSocial: razaoSocial,
+      nomeFantasia: nomeFantasia,
+      alvaraDeFuncionamento: alvaraF,
+      numero: numero,
+      cep: cep,
+      endereco: endereco,
+      bairro: bairro,
+      cidade: cidade,
+      uf: uf,
+      site: site,
+      email: decoded.Email,
+      telefone: telefone,
+      celular: celular,
+      idCliente: Number(decoded.IdCliente),
     }
-    console.log(data);
-    navigation.navigate('TermsLGPD', { data })
+
+    try {
+      axios({
+        method: 'post',
+        headers: {
+          'Accept': 'application/hal+json',
+          'Content-Type': 'application/merge-patch+json',
+        },
+        url: 'https://farmappapi.herokuapp.com/api/Cliente/CadastraContaFarmacia',
+        data: dataFull
+      }).then(function (response) {
+        if (response.status === 200) {
+          // navigation.navigate("Success");
+          Alert.alert('Conta Farmácia criada com sucesso.');
+          Alert.alert('ACESSE: http://farmappfront.herokuapp.com/Home para acessar sua conta farmácia.');
+          navigation.navigate("Home");
+        } else {
+          console.log(response)
+        }
+      })
+
+    } catch (error) {
+      console.log(error)
+    }
+    console.log(dataFull);
   }
 
   function handleGoBack() {
     navigation.goBack()
   }
-
-
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -127,6 +158,8 @@ export function NewAccountPharmacy() {
             texto="CNPJ"
             control={control}
             placeholder="CNPJ"
+            keyboardType="numeric"
+            onChangeText={(t) => setCnpj(t)}
             error={errors.cnpj && errors.cnpj.message}
           />
           <InputForm
@@ -136,6 +169,7 @@ export function NewAccountPharmacy() {
             placeholder="Razão Social"
             autoCapitalize="sentences"
             autoCorrect={false}
+            onChangeText={(t) => setRazaoSocial(t)}
             error={errors.razaoSocial && errors.razaoSocial.message}
           />
           <InputForm
@@ -145,6 +179,7 @@ export function NewAccountPharmacy() {
             placeholder="Nome Fantasia"
             autoCapitalize="sentences"
             autoCorrect={false}
+            onChangeText={(t) => setNomeFantasia(t)}
             error={errors.razaoSocial && errors.razaoSocial.message}
           />
           <InputForm
@@ -154,6 +189,7 @@ export function NewAccountPharmacy() {
             placeholder="Alvará de Funcionamento"
             autoCapitalize="sentences"
             autoCorrect={false}
+            onChangeText={(t) => setAlvaraF(t)}
             error={errors.alvaraDeFuncionamento && errors.alvaraDeFuncionamento.message}
           />
           <InputForm
@@ -163,27 +199,10 @@ export function NewAccountPharmacy() {
             placeholder="Número"
             autoCapitalize="sentences"
             autoCorrect={false}
+            keyboardType="numeric"
+            onChangeText={(t) => setNumero(t)}
             error={errors.numero && errors.numero.message}
           />
-
-          <InputForm
-            name="password"
-            texto="Senha"
-            control={control}
-            placeholder="Senha"
-            secureTextEntry={true}
-            error={errors.password && errors.password.message}
-          />
-
-          <InputForm
-            name="passwordRepeat"
-            texto="Repita a Senha"
-            control={control}
-            placeholder="Repita a Senha"
-            secureTextEntry={true}
-            error={errors.passwordRepeat && errors.passwordRepeat.message}
-          />
-
 
           <InputForm
             name="cep"
@@ -192,6 +211,8 @@ export function NewAccountPharmacy() {
             placeholder="CEP"
             autoCapitalize="sentences"
             autoCorrect={false}
+            keyboardType="numeric"
+            onChangeText={(t) => setCep(t)}
             error={errors.cep && errors.cep.message}
           />
           <InputForm
@@ -201,8 +222,36 @@ export function NewAccountPharmacy() {
             placeholder="Endereço"
             autoCapitalize="sentences"
             autoCorrect={false}
+            onChangeText={(t) => setEndereco(t)}
             error={errors.endereco && errors.endereco.message}
           />
+          <InputForm
+            name="bairro"
+            texto="Bairro"
+            // value={bairro}
+            control={control}
+            placeholder="Bairro"
+            onChangeText={(t) => setBairro(t)}
+          />
+
+          <InputForm
+            name="cidade"
+            texto="Cidade"
+            // value={localidade}
+            control={control}
+            placeholder="Cidade"
+            onChangeText={(t) => setCidade(t)}
+          />
+
+          <InputForm
+            name="uf"
+            texto="UF"
+            // value={uf}
+            control={control}
+            placeholder="UF"
+            onChangeText={(t) => setUf(t)}
+          />
+
           <InputForm
             name="site"
             texto="Site"
@@ -210,17 +259,9 @@ export function NewAccountPharmacy() {
             placeholder="Site"
             autoCapitalize="sentences"
             autoCorrect={false}
+            onChangeText={(t) => setSite(t)}
           />
 
-          <InputForm
-            name="email"
-            texto="E-mail"
-            control={control}
-            placeholder="E-mail"
-            autoCapitalize="sentences"
-            autoCorrect={false}
-            error={errors.email && errors.email.message}
-          />
           <InputForm
             name="telefone"
             texto="Telefone"
@@ -228,7 +269,8 @@ export function NewAccountPharmacy() {
             placeholder="Telefone"
             autoCapitalize="sentences"
             autoCorrect={false}
-
+            keyboardType="numeric"
+            onChangeText={(t) => setTelefone(t)}
           />
           <InputForm
             name="celular"
@@ -237,11 +279,11 @@ export function NewAccountPharmacy() {
             placeholder="Celular"
             autoCapitalize="sentences"
             autoCorrect={false}
-
+            keyboardType="numeric"
+            onChangeText={(t) => setCelular(t)}
           />
 
-
-          <Button title="Cadastrar" onPress={handleSubmit(handleRegister)} />
+          <Button title="Cadastrar" onPress={handleRegister} />
         </ContainerForm>
 
       </Container>

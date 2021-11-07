@@ -7,8 +7,13 @@ interface Props {
   token?: string;
 }
 
+interface TokenProps {
+  token: string;
+  setToken: () => void;
+}
+
 export const AuthProvider = ({ children }: Props) => {
-  const [token, setToken] = useState('');
+  const [token, setToken] = useState<TokenProps>();
   const [list, setList] = useState([]);
 
   useEffect(() => {
