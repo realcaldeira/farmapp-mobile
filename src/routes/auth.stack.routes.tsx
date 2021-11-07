@@ -1,50 +1,45 @@
 import React from 'react';
-import { createStackNavigator  } from '@react-navigation/stack';
+import { createStackNavigator } from '@react-navigation/stack';
 
 
 import { Login } from '../screens/Login';
 import { NewAccountPersonal } from '../screens/NewAccountPersonal';
-import { PersonalOrPharmacy } from '../screens/PersonalOrPharmacy';
 import { NewAccountPharmacy } from '../screens/NewAccountPharmacy';
 import { TermsLGPD } from '../screens/TermsLGPD';
 import { Success } from '../screens/Success';
 
 const { Navigator, Screen } = createStackNavigator();
 
-export function AuthStackRoutes(){
-  return(
+export function AuthStackRoutes() {
+  return (
     <Navigator
-    screenOptions={{ headerShown: false }}
-    initialRouteName="Home"
+      screenOptions={{ headerShown: false }}
+      initialRouteName="Home"
     >
 
-      <Screen  
+      <Screen
         name="Login"
         component={Login}
-        
+
       />
-      <Screen  
-        name="PersonalOrPharmacy"
-        component={PersonalOrPharmacy}
-        
-      />
-      <Screen  
+
+      <Screen
         name="NewAccountPersonal"
         component={NewAccountPersonal}
       />
-      <Screen  
+      <Screen
         name="NewAccountPharmacy"
         component={NewAccountPharmacy}
       />
-      <Screen  
+      <Screen
         name="TermsLGPD"
         component={TermsLGPD}
       />
-      <Screen  
+      <Screen
         name="Success"
         component={Success}
       />
-     
+
     </Navigator>
   )
 }

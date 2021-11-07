@@ -8,6 +8,7 @@ import { AccessLocation } from '../screens/AccessLocation';
 import { RecipeSearch } from '../screens/RecipeSearch';
 import { NotRecipeSearch } from '../screens/NotRecipeSearch';
 import { MyList } from '../screens/MyList';
+import { NewAccountPharmacy } from '../screens/NewAccountPharmacy';
 
 import { AntDesign, MaterialIcons } from '@expo/vector-icons'
 
@@ -97,6 +98,21 @@ export function AppDrawerRoutes() {
           drawerIcon: ({ size, color }) => (
             <MaterialIcons
               name="gps-fixed"
+              size={size}
+              color={color}
+            />
+          )
+        }}
+      />
+
+      <Screen
+        name="NewAccountPharmacy"
+        component={NewAccountPharmacy}
+        options={{
+          title: 'Criar conta farmácia',
+          drawerIcon: ({ size, color }) => (
+            <AntDesign
+              name="adduser"
               size={size}
               color={color}
             />
