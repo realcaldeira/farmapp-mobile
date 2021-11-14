@@ -72,7 +72,9 @@ export function Home() {
     setLoading(false)
   }
 
-
+  useEffect(() => {
+    Alert.alert('Pesquise o produto desejado e ordene de acordo com a distância ou preço')
+  }, [])
 
   return (
 
