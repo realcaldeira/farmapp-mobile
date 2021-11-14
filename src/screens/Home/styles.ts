@@ -18,6 +18,7 @@ export const ContainerSearch = styled.View`
   flex-direction: row;
   justify-content: space-between;
   margin: 0 12px;
+  margin-bottom: ${RFValue(27)}px;
 `;
 
 export const InputSearch = styled.TextInput`
@@ -45,13 +46,62 @@ export const ContainerOptions = styled.View`
   flex-direction: row;
   justify-content: space-between;
   padding: ${RFValue(10)}px ${RFValue(50)}px;
+
 `;
-export const ButtonOptions = styled.TouchableOpacity`
-  background-color: red;
+
+interface RadioBoxProps {
+  isActive: boolean;
+  activeColor: 'green' | 'red';
+}
+
+export const ButtonOptions = styled.TouchableOpacity<RadioBoxProps>`
+  background-color: ${(props) => props.isActive ? '#C6CFF9' : '#FFF'};
   align-items: center;
   width: ${RFValue(125)}px;
   height: ${RFValue(20)}px;
+  border-radius: 5px;
+  margin-bottom: ${RFValue(27)}px;
 `;
 export const TitleOptions = styled.Text`
   color: black;
+`;
+
+export const List = styled.FlatList`
+  height: 100%;
+  /* margin-top: 20px; */
+  /* background-color: red; */
+`;
+
+export const Card = styled.View`
+  width: 90%;
+  height: ${RFValue(100)}px;
+  margin: 0 ${RFValue(20)}px ;
+  background-color: #92A1E8;
+  border-radius: 5px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: ${RFValue(20)}px;
+
+  
+`;
+
+export const ContainerTitle = styled.Text`
+  
+
+`;
+export const MedicamentoTitle = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-weight: bold;
+`;
+export const FarmaciaTitle = styled.Text`
+  font-size: ${RFValue(14)}px;
+  font-weight: bold;
+`;
+export const Preço = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-weight: bold;
+`;
+export const Km = styled.Text`
+  font-size: ${RFValue(20)}px;
+  font-weight: bold;
 `;
